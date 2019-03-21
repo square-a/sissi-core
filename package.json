@@ -1,0 +1,53 @@
+{
+  "name": "sissi-core",
+  "version": "1.0.0",
+  "description": "Core scripts sissi (simple static sites)",
+  "license": "GPL-3.0-or-later",
+  "author": "A square",
+  "contributors": [
+    "Alex Kott <alex@a-square.eu>",
+    "Alina Beck <alina@a-square.eu"
+  ],
+  "repository": "square-a/sissi-cli",
+  "bugs": "https://github.com/square-a/sissi-core/issues",
+  "homepage": "https://github.com/square-a/sissi-core#readme",
+  "keywords": [
+    "sissi",
+    "static-site-generator"
+  ],
+  "main": "lib/index.js",
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "eslint": "^5.15.3",
+    "eslint-config-zweitag": "^1.0.3",
+    "eslint-import-resolver-alias": "^1.1.2"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.4.0"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "node": true
+          }
+        }
+      ]
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-object-rest-spread"
+    ]
+  },
+  "scripts": {
+    "clear": "rm -rf lib && mkdir lib",
+    "copy": "cp -r src/templates lib",
+    "build": "babel src -d lib --ignore src/templates",
+    "test": "eslint .",
+    "prepare": "npm test && npm run clear && npm run build && npm run copy"
+  }
+}
