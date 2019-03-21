@@ -4,7 +4,7 @@ module.exports = {
   extends: 'zweitag',
   settings: {
     react: {
-      version: '0',
+      version: '16.8',
     },
     'import/resolver': {
       alias: [
