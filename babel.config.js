@@ -9,6 +9,7 @@ module.exports = {
       },
     ],
     '@babel/preset-react',
+    'minify',
   ],
   plugins: [
     '@babel/plugin-proposal-object-rest-spread',
