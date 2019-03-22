@@ -4,20 +4,20 @@ const path = require('path');
 const Content = require('@/migrations/Content');
 const readJson = require('@/utils/readJson');
 
-module.exports = async function migrate() {
-  const contentPath = path.join(process.cwd(), 'content.json');
-  const structurePath = path.join(process.cwd(), 'structure.json');
+const contentPath = path.join(process.cwd(), 'content.json');
+const structurePath = path.join(process.cwd(), 'structure.json');
 
+module.exports = async function migrate() {
   const { error: strError, file: structure } = readJson(structurePath);
   if (strError) {
     console.log(strError);
-    return;
+    return null;
   }
 
   const { error: cntError, file: content } = readJson(contentPath, true);
   if (cntError) {
     console.log(cntError);
-    return;
+    return null;
   }
 
   const newContent = new Content(content, structure);
@@ -31,14 +31,13 @@ module.exports = async function migrate() {
   const hasContentChanged = JSON.stringify(content) !== JSON.stringify(newContent.getContent());
 
   if (hasContentChanged) {
-    let message = 'New content.json created.';
+    console.log('New content.json created.');
 
     if (!isInitialContent) {
       fs.copyFileSync(contentPath, `${contentPath}.backup`);
-      message += ' Backup saved as content.json.backup';
+      console.log('Backup saved as content.json.backup');
     }
 
-    fs.writeFileSync(contentPath, JSON.stringify(newContent.getContent(), null, 2));
-    console.log(message);
+    return JSON.stringify(newContent.getContent(), null, 2);
   }
 };

@@ -3,11 +3,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
 
+const config = require('@/config');
+
 const isProduction = process.env.NODE_ENV === 'production';
-const inPath = path.resolve(process.cwd(), 'src');
-const outPath = path.resolve(process.cwd(), 'public');
-const htmlName = '_tmp/template.html';
-const scriptName = '_tmp/sissi-script.js';
+const inPath = path.resolve(process.cwd(), config.inDir);
+const outPath = path.resolve(process.cwd(), config.publicDir);
+const htmlName = `${config.tmpDir}/template.html`;
+const scriptName = `${config.tmpDir}/sissi-script.js`;
 const styleName = 'sissi-styles.css';
 
 module.exports = {
@@ -15,12 +17,13 @@ module.exports = {
   output: {
     filename: scriptName,
     path: outPath,
-    library: 'Page',
+    library: config.entryComponent,
     libraryTarget: 'umd',
   },
   devtool: isProduction ? false : 'source-maps',
   devServer: {
     contentBase: outPath,
+    port: config.devPort,
   },
   mode: isProduction ? 'production' : 'development',
   module: {
