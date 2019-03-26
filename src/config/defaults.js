@@ -1,5 +1,5 @@
 module.exports = {
-  inDir: 'src',
+  inDir: 'test',
   outDir: 'build',
   publicDir: 'public',
   tmpDir: '_tmp',
