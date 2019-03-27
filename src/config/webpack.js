@@ -16,6 +16,7 @@ module.exports = {
   entry: inPath,
   output: {
     filename: scriptName,
+    publicPath: '/',
     path: outPath,
     library: config.entryComponent,
     libraryTarget: 'umd',
