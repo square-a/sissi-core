@@ -83,8 +83,12 @@
   },
   "scripts": {
     "clear": "rm -rf lib && mkdir lib",
-    "build": "babel src -d lib",
+    "build": "npm run clear && npm run build:core && npm run build:cms",
+    "build:core": "export NODE_ENV=production && babel src -d lib",
+    "build:cms": "export NODE_ENV=production && export SISSI_CMS=true && webpack --config lib/config/webpack.js",
+    "dev:cms": "export SISSI_CMS=true && webpack-dev-server --config lib/config/webpack.js",
     "test": "eslint .",
+
     "watch": "webpack --watch --config lib/config/webpack.js",
     "server": "webpack-dev-server --config lib/config/webpack.js",
     "webpack": "export NODE_ENV=production && webpack --config lib/config/webpack.js"

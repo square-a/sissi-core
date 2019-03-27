@@ -1,6 +1,5 @@
-module.exports = {
+const options = {
   ignore: [
-    'src/cms', // will be processed by webpack
     'src/__testSetup__',
   ],
   presets: [
@@ -13,7 +12,7 @@ module.exports = {
       },
     ],
     '@babel/preset-react',
-    'minify',
+    ['minify', { builtIns: false }],
   ],
   plugins: [
     '@babel/plugin-proposal-object-rest-spread',
@@ -29,3 +28,9 @@ module.exports = {
     ],
   ],
 };
+
+if (!process.env.SISSI_CMS) { // will be processed by webpack
+  options.ignore.push('src/cms');
+}
+
+module.exports = options;

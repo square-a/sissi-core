@@ -3,7 +3,11 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const postcssPresetEnv = require('postcss-preset-env');
 
-const config = require('@/config');
+let config = require('@/config');
+
+if (process.env.SISSI_CMS) {
+  config = require('@/config/cms');
+}
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -33,7 +37,6 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
-        include: [inPath],
         loader: 'babel-loader',
         options: {
           plugins: ['syntax-dynamic-import'],
