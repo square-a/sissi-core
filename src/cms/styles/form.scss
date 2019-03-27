@@ -1,0 +1,127 @@
+.form {
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  width: 100%;
+  padding: $gap-normal $gap-normal 0;
+  border-radius: $border-radius;
+  overflow-y: auto;
+
+  background-color: $color-background;
+
+  // firefox fix for padding-bottom
+  & > :last-child {
+    margin-bottom: 0;
+    padding-bottom: $gap-normal;
+  }
+}
+
+.form__element {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  margin: 0 $button-width $gap-wide 0;
+}
+
+.form__element--buttons {
+  flex-direction: row;
+
+  .button {
+    margin-right: $gap-half;
+  }
+}
+
+.form__label {
+  margin-bottom: $gap-tiny;
+}
+
+.form__field {
+  height: $field-height;
+  width: 60%;
+  padding: 0 $gap-half;
+  border: 1px solid $color-main-light;
+  border-radius: $border-radius;
+
+  background-color: $color-field-background;
+  font-size: $font-size-normal;
+
+  &::placeholder {
+    opacity: 1;
+    color: $color-field-placeholder;
+  }
+}
+
+.form__field--textarea {
+  height: $field-height-textarea;
+  padding: $gap-tiny $gap-half $gap-half;
+  resize: vertical;
+}
+
+.form__field--image {
+  position: relative;
+  height: $field-height-image;
+  width: $field-height-image;
+  border: none;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  cursor: pointer;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    background-color: $color-white;
+
+    text-align: center;
+    font-family: 'Icon';
+    font-size: 60px;
+    line-height: $field-height-image;
+
+    opacity: 0;
+    transition: opacity .1s;
+  }
+
+  &:hover:not(.placeholder)::after {
+    content: $icon-round-arrows;
+    opacity: 0.8;
+  }
+}
+
+.form__list-item {
+  margin-bottom: $gap-normal;
+  padding: $gap-normal;
+  border: 1px dashed $color-main-light;
+  border-radius: $border-radius;
+
+  .form__element {
+    margin-right: 0;
+  }
+
+  :last-child,
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.form__list-buttons {
+  display: flex;
+  flex-direction: row;
+
+  .button {
+    max-width: $button-width;
+    hyphens: none;
+
+    &:not(:last-child) {
+      margin-right: $gap-tiny;
+    }
+  }
+}

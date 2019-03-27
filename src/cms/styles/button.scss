@@ -1,0 +1,34 @@
+.button {
+  display: flex;
+  justify-content: center;
+
+  min-height: $button-height;
+  min-width: $button-width;
+  border-radius: $border-radius;
+  border: 1.5px solid;
+
+  font-size: $font-size-button;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  hyphens: auto;
+
+  cursor: pointer;
+  transition: border-color .1s;
+
+  @include invert-on-hover($color-main-medium, $color-background);
+
+  &:hover {
+    border-color: $color-main-medium;
+  }
+}
+
+.button--cta {
+  border: none;
+  color: $color-background;
+  background-color: $color-main-medium;
+  transition: color .1s, background-color .1s;
+
+  &:hover {
+    background-color: $color-main-dark;
+  }
+}

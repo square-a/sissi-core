@@ -1,0 +1,156 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $z-index-modal;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  width: 100%;
+
+  background-color: $color-background-transparent;
+}
+
+.modal--alert {
+  z-index: $z-index-alerts;
+}
+
+.modal__box {
+  height: 60%;
+  width: 60%;
+  padding: $gap-normal;
+  border: $gap-normal solid $color-main-dark;
+  border-radius: $border-radius;
+  overflow-y: auto;
+
+  background-color: $color-background;
+}
+
+.modal__box--alert {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  min-height: 30%;
+  min-width: (2 * $button-width) + (2 * $gap-wide);
+  height: auto;
+  width: 40%;
+
+  background-color: $color-white;
+
+  white-space: pre-wrap;
+}
+
+.modal__box--guide {
+  display: block;
+  background-color: $color-white;
+}
+
+.modal__box--image-picker {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(100px, 50%);
+  grid-gap: 20px;
+
+  &::after {
+    content: '';
+    height: 1px;
+    grid-column-start: 1;
+  }
+}
+
+.modal__box--type-picker {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+
+  padding-top: 2 * $gap-wide;
+
+  h2 {
+    position: absolute;
+    top: 0;
+  }
+
+  .button {
+    margin: $gap-half;
+  }
+}
+
+.modal__box.loading {
+  border: none;
+  box-shadow: 0 0 0 $gap-normal inset;
+  position: relative;
+  padding: 80px 40px;
+  color: $color-main-dark;
+
+  &::before,
+  &::after {
+    content: '';
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+  }
+
+  &::before {
+    top: 0;
+    left: 0;
+    border-radius: $border-radius;
+    animation: spinner-top-right ease-out 3s infinite both;
+  }
+
+  &::after {
+    bottom: 0;
+    right: 0;
+    border-radius: $border-radius;
+    animation: spinner-bottom-left ease-out 3s 1.5s infinite both;
+  }
+}
+
+.modal__title {
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.modal__message {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.modal__button-row {
+  display: flex;
+  flex-direction: row;
+
+  .button {
+    &:not(.button--cta):not(:hover) {
+      color: inherit;
+      background-color: $color-white;
+    }
+
+    &:not(:last-child) {
+      margin-right: $gap-tiny;
+    }
+  }
+}
+
+.modal__image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 2px;
+  cursor: pointer;
+
+  &:hover:not(.placeholder) {
+    border: 2px solid $color-background;
+    padding: 0;
+  }
+}

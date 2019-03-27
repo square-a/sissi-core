@@ -1,0 +1,60 @@
+/* COLORS */
+
+$color-main-dark: rgb(59, 125, 100);
+$color-main-medium: rgb(135, 184, 88);
+$color-main-light: rgb(206, 228, 143);
+
+$color-background: rgb(253, 253, 242);
+$color-background-transparent: rgba(253, 253, 242, 0.9);
+
+$color-white: rgb(255, 255, 255);
+$color-grey: rgb(190, 190, 190);
+
+$color-error: rgb(158, 14, 19);
+$color-success: $color-main-medium;
+
+$color-field-background: $color-white;
+$color-field-border: $color-grey;
+$color-field-placeholder: $color-grey;
+
+/* MEASURES */
+
+$gap-wide: 30px;
+$gap-normal: 20px;
+$gap-half: 10px;
+$gap-tiny: 6px;
+
+$element-height: 40px;
+$nav-item-height: 60px;
+
+$button-width: 160px;
+$button-height: $element-height;
+
+$field-height: $element-height;
+$field-height-textarea: 2 * $element-height;
+$field-height-image: 4 * $element-height;
+
+$border-radius: 12px;
+
+/* FONT SIZE */
+
+$font-size-title: 32px;
+$font-size-normal: 16px;
+$font-size-button: 15px; // only used with text-transform: uppercase
+
+/* Z-INDEX */
+
+$z-index-alerts: 6;
+$z-index-modal: 5;
+$z-index-actionbar: 4;
+
+/* ICONS */
+
+$icon-image: "\e90d";
+$icon-back: "\e967";
+$icon-trash: "\e9ad";
+$icon-earth: "\e9ca";
+$icon-plus: "\ea0a";
+$icon-cross: "\ea0f";
+$icon-checkmark: "\ea10";
+$icon-round-arrows: "\ea2e";

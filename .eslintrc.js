@@ -8,7 +8,8 @@ module.exports = {
     },
     'import/resolver': {
       alias: [
-        ['@', path.resolve(process.cwd(), 'src')]
+        ['@', path.resolve(process.cwd(), 'src')],
+        ['%', path.resolve(process.cwd(), 'src/cms')]
       ]
     }
   },

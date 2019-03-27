@@ -1,4 +1,8 @@
 module.exports = {
+  ignore: [
+    'src/cms', // will be processed by webpack
+    'src/__testSetup__',
+  ],
   presets: [
     [
       '@babel/preset-env',
@@ -19,6 +23,7 @@ module.exports = {
         root: ['./src'],
         alias: {
           '@': './src',
+          '%': './src/cms',
         },
       },
     ],

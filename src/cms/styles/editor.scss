@@ -1,0 +1,24 @@
+.editor {
+  width: 100%;
+  border: $gap-normal solid $color-main-dark;
+  border-left: none;
+
+  background-color: $color-main-dark;
+}
+
+.editor--level-2 {
+  border-left: $gap-normal solid $color-main-medium;
+  border-color: $color-main-medium;
+  background-color: $color-main-medium;
+}
+
+.editor--level-3 {
+  border-color: $color-main-medium;
+  background-color: $color-main-medium;
+}
+
+.editor--level-4 {
+  border-left: $gap-normal solid $color-main-light;
+  border-color: $color-main-light;
+  background-color: $color-main-light;
+}

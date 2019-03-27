@@ -1,0 +1,55 @@
+.editor-toolbar {
+  padding: $gap-tiny;
+  border: none;
+  border-top-left-radius: $border-radius;
+  border-top-right-radius: $border-radius;
+
+  background-color: $color-main-light;
+
+  .fa {
+    color: $color-main-dark;
+  }
+
+  &::before,
+  &::after {
+    display: none;
+  }
+}
+
+.CodeMirror {
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+  border: 1px solid $color-main-light;
+}
+
+.CodeMirror-placeholder {
+  color: $color-field-placeholder;
+  opacity: 1;
+}
+
+.CodeMirror .CodeMirror-code {
+  & .cm-header-1 {
+    font-size: 140%;
+    line-height: 140%;
+  }
+  & .cm-header-2 {
+    font-size: 120%;
+    line-height: 120%;
+  }
+  & .cm-header-3 {
+    font-size: 100%;
+    line-height: 100%;
+  }
+  & .cm-header-4 {
+    font-size: 100%;
+    line-height: 100%;
+  }
+  & .cm-header-5 {
+    font-size: 100%;
+    line-height: 100%;
+  }
+  & .cm-header-6 {
+    font-size: 100%;
+    line-height: 100%;
+  }
+}

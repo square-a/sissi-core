@@ -1,0 +1,76 @@
+.success {
+  color: $color-success;
+  border-color: $color-success;
+
+  .button {
+    color: $color-background;
+    background-color: $color-success;
+
+    &:hover {
+      border: none;
+      background-color: $color-main-dark;
+    }
+  }
+}
+
+.error {
+  color: $color-error;
+  border-color: $color-error;
+
+  .button {
+    color: $color-background;
+    background-color: $color-error;
+
+    &:hover {
+      border: none;
+      background-color: $color-main-dark;
+    }
+  }
+}
+
+.neutral {
+  color: $color-main-dark;
+  border-color: $color-main-dark;
+
+  .button {
+    color: $color-background;
+    background-color: $color-main-dark;
+
+    &:hover {
+      border: none;
+      background-color: $color-success;
+    }
+  }
+}
+
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px dashed $color-main-light;
+
+  color: $color-field-placeholder;
+  background-color: $color-white;
+
+  text-align: center;
+
+  transition: color .1s;
+
+  &:hover {
+    color: $color-main-dark;
+    border-color: $color-main-dark;
+  }
+
+  &::before {
+    content: $icon-image;
+    font-family: 'Icon';
+    font-size: 40px;
+  }
+}
+
+.text-rotate {
+  display: inline-block;
+  transform: rotate(-15deg);
+}

@@ -6,10 +6,12 @@ const postcssPresetEnv = require('postcss-preset-env');
 const config = require('@/config');
 
 const isProduction = process.env.NODE_ENV === 'production';
+
 const inPath = path.resolve(process.cwd(), config.inDir);
-const outPath = path.resolve(process.cwd(), config.publicDir);
-const templateName = `${config.tmpDir}/template.html`;
-const scriptName = `${config.tmpDir}/sissi-script.js`;
+const publicPath = path.resolve(process.cwd(), config.publicDir);
+
+const htmlOutName = `${config.tmpDir}${config.tmpName}.html`;
+const scriptName = `${config.tmpDir}sissi-script.js`;
 const styleName = 'sissi-styles.css';
 
 module.exports = {
@@ -17,13 +19,13 @@ module.exports = {
   output: {
     filename: scriptName,
     publicPath: '/',
-    path: outPath,
+    path: publicPath,
     library: config.entryComponent,
     libraryTarget: 'umd',
   },
   devtool: isProduction ? false : 'source-maps',
   devServer: {
-    contentBase: outPath,
+    contentBase: publicPath,
     port: config.devPort,
   },
   mode: isProduction ? 'production' : 'development',
@@ -60,12 +62,12 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: isProduction ? templateName : 'index.html',
-      template: path.resolve(outPath, 'index.html'),
+      filename: isProduction ? htmlOutName : `${config.htmlInName}.html`,
+      template: path.resolve(publicPath, `${config.htmlInName}.html`),
     }),
     new MiniCssExtractPlugin({
       filename: styleName,
-      path: outPath,
+      path: publicPath,
     }),
   ],
 };

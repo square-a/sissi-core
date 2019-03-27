@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Assistant', sans-serif;
+  font-size: $font-size-normal;
+  color: $color-main-dark;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+button,
+input,
+textarea {
+  font-weight: 300;
+}
+
+input,
+select,
+textarea,
+button {
+  font-family: 'Assistant', sans-serif;
+  font-size: $font-size-normal;
+}
+
+button {
+  border: none;
+}
+
+.app {
+  display: flex;
+  height: 100vh;
+}
