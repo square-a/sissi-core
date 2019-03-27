@@ -32,7 +32,6 @@ module.exports = (async function snapshot() {
   fs.mkdirSync(outPath);
 
   await copyDir(publicPath, outPath, { filter: /^(?!.*_tmp)(?!.*index\.html).*$/ });
-
   const crawler = new Crawler(Page, content, template);
   const staticPages = await crawler.crawl();
 

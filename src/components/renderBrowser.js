@@ -6,13 +6,15 @@ const { BrowserRouter } = require('react-router-dom');
 const buildRouteContent = require('@/utils/buildRouteContent');
 const SissiRoutes = require('./SissiRoutes');
 
-export function render(EntryComponent, content) {
-  ReactDOM.render(
-    <BrowserRouter>
-      <SissiRoutes routes={buildRouteContent(content)}>
-        <EntryComponent />
-      </SissiRoutes>
-    </BrowserRouter>,
-    document.querySelector('#sissi')
-  );
-}
+module.exports = function render(EntryComponent, content) {
+  if (process.env.NODE_ENV !== 'production') {
+    ReactDOM.render(
+      <BrowserRouter>
+        <SissiRoutes routes={buildRouteContent(content)}>
+          <EntryComponent />
+        </SissiRoutes>
+      </BrowserRouter>,
+      document.querySelector('#sissi')
+    );
+  }
+};

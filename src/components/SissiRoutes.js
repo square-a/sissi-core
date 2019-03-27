@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Route } from 'react-router';
+const React = require('react');
+const PropTypes = require('prop-types');
+const { Route } = require('react-router');
 
 const SissiRoutes = ({ routes = [], children }) => (
   <div>
@@ -25,4 +25,4 @@ SissiRoutes.propTypes = {
   routes: PropTypes.array.isRequired,
 };
 
-export default SissiRoutes;
+module.exports = SissiRoutes;

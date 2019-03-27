@@ -3,8 +3,7 @@ const renderServer = require('@/components/renderServer');
 export const SISSI_LINK = /<a[^>]*data-type=('|")sissi-internal('|")[^>]*>/g;
 export const LINK_HREF = /href=('|")([^']*)('|")/;
 export const TARGET_FILTER = /^\/?([^?#\s]*)/;
-export const SISSI_CONTAINER = /(<div[^<]*id=('|")sissi('|")[^\/]*>)(<\/div>)/;
-
+export const SISSI_CONTAINER = /(<div[^<]*id=('|")sissi('|")[^/]*>)(<\/div>)/;
 
 module.exports = class Crawler {
   constructor(Page, content, template) {

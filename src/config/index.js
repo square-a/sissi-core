@@ -6,7 +6,8 @@ const defaults = require('./defaults');
 let options = { ...defaults };
 
 try {
-  const customOptions = fs.readFileSync(path.join(process.cwd(), '.sissi'));
+  const customOptionsFile = fs.readFileSync(path.join(process.cwd(), '.sissi'));
+  const customOptions = JSON.parse(customOptionsFile);
 
   options = {
     ...options,

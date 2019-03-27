@@ -6,8 +6,9 @@ const { StaticRouter } = require('react-router-dom');
 const buildRouteContent = require('@/utils/buildRouteContent');
 const SissiRoutes = require('./SissiRoutes');
 
-export function renderStatic(EntryComponent, content, path) {
+module.exports = function renderStatic(EntryComponent, content, path) {
   const url = /^\//.test(path) ? path : `/${path}`;
+
   return ReactDOMServer.renderToStaticMarkup(
     <StaticRouter context={{}} location={url}>
       <SissiRoutes routes={buildRouteContent(content)}>
@@ -15,4 +16,4 @@ export function renderStatic(EntryComponent, content, path) {
       </SissiRoutes>
     </StaticRouter>
   );
-}
+};

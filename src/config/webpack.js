@@ -8,7 +8,7 @@ const config = require('@/config');
 const isProduction = process.env.NODE_ENV === 'production';
 const inPath = path.resolve(process.cwd(), config.inDir);
 const outPath = path.resolve(process.cwd(), config.publicDir);
-const htmlName = `${config.tmpDir}/template.html`;
+const templateName = `${config.tmpDir}/template.html`;
 const scriptName = `${config.tmpDir}/sissi-script.js`;
 const styleName = 'sissi-styles.css';
 
@@ -29,7 +29,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         include: [inPath],
         loader: 'babel-loader',
         options: {
@@ -59,8 +59,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: htmlName,
-      inject: 'head',
+      filename: isProduction ? templateName : 'index.html',
       template: path.resolve(outPath, 'index.html'),
     }),
     new MiniCssExtractPlugin({

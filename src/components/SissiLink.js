@@ -12,4 +12,4 @@ SissiLink.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default SissiLink;
+module.exports = SissiLink;
