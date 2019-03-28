@@ -41,6 +41,7 @@ module.exports = {
         options: {
           plugins: ['syntax-dynamic-import'],
           presets: ['@babel/preset-react'],
+          cacheDirectory: true,
         },
       },
       {

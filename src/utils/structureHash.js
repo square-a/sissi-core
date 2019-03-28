@@ -34,7 +34,7 @@ module.exports = {
     } catch (e) {
       prevHash = '';
     }
-    const newHash = this.hashStructure();
+    const newHash = this.createStructureHash();
     if (newHash === prevHash) {
       return false;
     }

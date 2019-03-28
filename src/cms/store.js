@@ -11,7 +11,6 @@ import {
 } from 'react-localize-redux';
 import { reducer as formReducer } from 'redux-form';
 import { renderToStaticMarkup } from 'react-dom/server';
-import createHistory from 'history/createBrowserHistory';
 import thunk from 'redux-thunk';
 
 import * as middlewares from '%/middleware';
@@ -27,13 +26,12 @@ import translations from '%/translations';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const customMiddleware = Object.values(middlewares);
-const history = createHistory();
 
 const {
   reducer: locationReducer,
   middleware: locationMiddleware,
   enhancer: locationEnhancer,
-} = connectRoutes(history, routes, routerOptions);
+} = connectRoutes(routes, routerOptions);
 
 const middleware = applyMiddleware(
   locationMiddleware,

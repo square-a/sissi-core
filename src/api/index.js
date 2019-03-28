@@ -6,11 +6,12 @@ const fileUpload = require('express-fileupload');
 const chalk = require('chalk');
 
 const config = require('@/config');
+const cmsConfig = require('@/config/cms');
 const { init } = require('./authService');
 const migrateContent = require('./migrateContent');
 const router = require('./router');
 
-const cmsDir = path.join(__dirname, '../..', 'sissi-lib');
+const cmsDir = path.join(__dirname, '../..', cmsConfig.publicDir);
 const imageDirectory = path.join(process.cwd(), 'public', 'images');
 
 module.exports = async function run() {
@@ -24,7 +25,7 @@ module.exports = async function run() {
   app.use('/api', router);
   app.use('/', express.static(cmsDir));
   app.use('/images', express.static(imageDirectory));
-  app.get('*', (req, res) => res.sendFile(path.join(cmsDir, 'index.html')));
+  app.get('*', (req, res) => res.sendFile(path.join(cmsDir, `${cmsConfig.tmpName}.html`)));
 
   try {
     await migrateContent();
