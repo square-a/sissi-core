@@ -13,21 +13,26 @@ global.window = {};
 const copyDir = promisify(ncp);
 const sissiScriptTag = /<script([^>])*sissi-script([^>])*><\/script>/;
 
-const cwd = process.cwd();
-const outPath = path.join(cwd, config.outDir);
-const publicPath = path.join(cwd, config.publicDir);
-const tmpPath = path.join(publicPath, config.tmpDir);
+const requireNoCache = filePath => {
+  delete require.cache[require.resolve(filePath)];
+  return require(filePath);
+};
 
-const contentJsonFile = path.join(cwd, 'content.json');
-const templateFile = path.join(tmpPath, 'template.html');
-const scriptFile = path.join(tmpPath, 'sissi-script');
+module.exports = async function snapshot() {
+  const cwd = process.cwd();
+  const outPath = path.join(cwd, config.outDir);
+  const publicPath = path.join(cwd, config.publicDir);
+  const tmpPath = path.join(publicPath, config.tmpDir);
 
-const content = require(contentJsonFile);
-const templateWithScript = fs.readFileSync(templateFile, 'utf-8');
-const Page = require(scriptFile).default;
-const template = templateWithScript.replace(sissiScriptTag, '');
+  const contentJsonFile = path.join(cwd, 'content.json');
+  const templateFile = path.join(tmpPath, 'template.html');
+  const scriptFile = path.join(tmpPath, 'sissi-script');
 
-module.exports = (async function snapshot() {
+  const content = requireNoCache(contentJsonFile);
+  const templateWithScript = fs.readFileSync(templateFile, 'utf-8');
+  const Page = requireNoCache(scriptFile).default;
+  const template = templateWithScript.replace(sissiScriptTag, '');
+
   rimraf.sync(outPath);
   fs.mkdirSync(outPath);
 
@@ -42,4 +47,4 @@ module.exports = (async function snapshot() {
     mkDirPSync(dirName);
     fs.writeFileSync(filePath, html);
   });
-}());
+};

@@ -1,6 +1,8 @@
-const { spawn } = require('child_process');
 const express = require('express');
+const webpack = require('webpack');
 
+const snapshot = require('@/commands/snapshot');
+const webpackConfig = require('@/config/webpack');
 const { authenticate, login } = require('./authService');
 const { getAllImages, saveImage } = require('./imageController');
 const { readJson, writeJson } = require('./jsonController');
@@ -68,28 +70,23 @@ router.route('/images')
 router.route('/build')
   .post(
     authenticate(),
-    (req, res) => {
-      let isErrored = false;
-      const child = spawn('sissi', ['build'], { cwd: process.cwd() });
+    async (req, res) => {
+      await webpack(webpackConfig, async (err, stats) => {
+        try {
+          if (err) {
+            throw err;
+          } else if (stats.hasErrors()) {
+            const info = stats.toJson();
+            throw info.errors;
+          }
 
-      child.stderr.on('data', data => {
-        res.sendStatus(422);
-        isErrored = true;
-        console.log(data.toString());
-      });
+          await snapshot();
+          res.sendStatus(200);
 
-      child.stdout.on('data', data => console.log(data.toString()));
-
-      child.on('close', code => {
-        if (isErrored) {
-          return;
-        }
-        if (code !== 0) {
+        } catch (error) {
+          console.log(error);
           res.sendStatus(422);
-          return;
         }
-
-        res.sendStatus(200);
       });
     }
   );

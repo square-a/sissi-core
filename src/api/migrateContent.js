@@ -13,6 +13,8 @@ module.exports = async function migrateContent() {
     return;
   }
 
+  structureHash.createStructureHash(true);
+
   const { error: strError, file: structure } = readJson(structurePath);
   if (strError) {
     console.log(strError);
