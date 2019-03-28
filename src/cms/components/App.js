@@ -25,12 +25,12 @@ const App = ({ route }) => (
     {route === ROUTE_LOGIN
       ? <C.Login />
       : [
-          <C.Navigation key='navigation' />,
-          <C.Editor key='editor' />,
-          <C.ActionBar key='actionbar' />,
-          <C.Guide key='guide' />,
-          <C.TypePicker key='typePicker' />,
-        ]
+        <C.Navigation key='navigation' />,
+        <C.Editor key='editor' />,
+        <C.ActionBar key='actionbar' />,
+        <C.Guide key='guide' />,
+        <C.TypePicker key='typePicker' />,
+      ]
     }
     <C.Alert />
   </div>

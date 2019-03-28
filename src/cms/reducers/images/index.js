@@ -17,9 +17,9 @@ export default (state = initialState, action = {}) => {
   } else if (type === t.RESET_SESSION) {
     return initialState;
 
-  } else {
-    return state;
   }
+
+  return state;
 };
 
 export const getAllImages = state => state.images;

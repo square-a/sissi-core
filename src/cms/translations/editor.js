@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 export const IMAGE_SELECT = 'translations/editor/selectImage';
 export const IMAGE_PASTE_IN_EDITOR = 'translations/editor/pasteImage';
 export const IMAGE_UPLOAD = 'translations/editor/uploadImage';

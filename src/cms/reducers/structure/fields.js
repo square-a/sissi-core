@@ -16,13 +16,13 @@ export default (state = initialState, action = {}) => {
   }
 
   return state;
-}
+};
 
 export const getFields = state => state.structure.fields;
 
-export const getFieldList = fieldListName => state => state.structure.fields[fieldListName]
-  ? state.structure.fields[fieldListName]
-  : {};
+export const getFieldList = fieldListName => state => (
+  state.structure.fields[fieldListName] ? state.structure.fields[fieldListName] : {}
+);
 
 export const getFieldListFields = fieldListName => createSelector(
   [

@@ -1,6 +1,14 @@
-import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
+import {
+  applyMiddleware,
+  combineReducers,
+  compose,
+  createStore,
+} from 'redux';
 import { connectRoutes } from 'redux-first-router';
-import { localizeReducer, initialize } from 'react-localize-redux';
+import {
+  localizeReducer,
+  initialize,
+} from 'react-localize-redux';
 import { reducer as formReducer } from 'redux-form';
 import { renderToStaticMarkup } from 'react-dom/server';
 import createHistory from 'history/createBrowserHistory';
@@ -39,7 +47,7 @@ const store = createStore(
     location: locationReducer,
     form: formReducer,
     localize: localizeReducer,
-    ...reducers
+    ...reducers,
   }),
   composeEnhancers(locationEnhancer, middleware)
 );

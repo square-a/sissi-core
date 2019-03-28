@@ -61,7 +61,7 @@ describe('actions/content', () => {
         };
         mockDispatch = jest.fn();
         mockGetState = jest.fn(() => mockState);
-      })
+      });
 
       it('should dispatch deleteSection', () => {
         actions.deleteItem()(mockDispatch, mockGetState);
@@ -85,7 +85,7 @@ describe('actions/content', () => {
       beforeEach(() => {
         mockDispatch = jest.fn();
         mockGetState = jest.fn(() => _testState);
-      })
+      });
 
       it('should dispatch deletePage', () => {
         actions.deleteItem()(mockDispatch, mockGetState);

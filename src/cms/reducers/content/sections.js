@@ -8,7 +8,7 @@ const initialState = {};
 export default (state = initialState, action = {}) => {
   const { type, payload } = action;
 
-  switch(type) {
+  switch (type) {
     case t.SEND_REQUEST:
       if (payload.dataType === k.CONTENT) {
         return payload.responseData.sections || initialState;
@@ -21,9 +21,10 @@ export default (state = initialState, action = {}) => {
         [payload.section._id]: payload.section,
       };
 
-    case t.DELETE_SECTION:
+    case t.DELETE_SECTION: {
       const { [payload.sectionId]: sectionToDelete, ...newState } = state;
       return newState;
+    }
 
     case t.ADD_LIST_ITEM:
       if (payload.parentType === k.SECTIONS) {

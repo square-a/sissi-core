@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -34,47 +35,50 @@ const Navigation = ({
   onAddSection,
   onDragEnd,
 }) => [
-  pageProps && <C.NavBar
-    key='pageNav'
-    level='1'
-    type={k.PAGES}
-    onDragEnd={onDragEnd}
-  >
-    {pageProps.itemIds.map((id, index) => (
-      <C.NavItem
-        key={id}
-        id={id}
-        index={index}
-        type={k.PAGES}
-      />
-    ))}
-    {pageProps.canAdd && (
-      <C.Button onClick={onAddPage} classes='navbar__button'>
-        <Translate id={tr.ADD} />
-      </C.Button>
-    )}
-  </C.NavBar>
-  ,
-  sectionProps && <C.NavBar
-    key='sectionNav'
-    level={pageProps ? '2' : '1'}
-    type={k.SECTIONS}
-    onDragEnd={(...props) => onDragEnd(...props, sectionProps.pageId)}
-  >
-    {sectionProps.itemIds.map((id, index) => (
-      <C.NavItem
-        key={id}
-        id={id}
-        index={index}
-        type={k.SECTIONS}
-      />
-    ))}
-    {sectionProps.canAdd && (
-      <C.Button onClick={() => onAddSection(sectionProps.pageId)} classes='navbar__button'>
-        <Translate id={tr.ADD} />
-      </C.Button>
-    )}
-  </C.NavBar>
+  pageProps && (
+    <C.NavBar
+      key='pageNav'
+      level='1'
+      type={k.PAGES}
+      onDragEnd={onDragEnd}
+    >
+      {pageProps.itemIds.map((id, index) => (
+        <C.NavItem
+          key={id}
+          id={id}
+          index={index}
+          type={k.PAGES}
+        />
+      ))}
+      {pageProps.canAdd && (
+        <C.Button classes='navbar__button' onClick={onAddPage}>
+          <Translate id={tr.ADD} />
+        </C.Button>
+      )}
+    </C.NavBar>
+  ),
+  sectionProps && (
+    <C.NavBar
+      key='sectionNav'
+      level={pageProps ? '2' : '1'}
+      type={k.SECTIONS}
+      onDragEnd={(...props) => onDragEnd(...props, sectionProps.pageId)}
+    >
+      {sectionProps.itemIds.map((id, index) => (
+        <C.NavItem
+          key={id}
+          id={id}
+          index={index}
+          type={k.SECTIONS}
+        />
+      ))}
+      {sectionProps.canAdd && (
+        <C.Button classes='navbar__button' onClick={() => onAddSection(sectionProps.pageId)}>
+          <Translate id={tr.ADD} />
+        </C.Button>
+      )}
+    </C.NavBar>
+  ),
 ];
 
 Navigation.propTypes = {

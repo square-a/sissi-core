@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Translate } from 'react-localize-redux';
@@ -18,9 +20,9 @@ class ImageField extends React.Component {
   }
 
   onToggleImagePicker() {
-    this.setState({
-      isImagePickerActive: !this.state.isImagePickerActive,
-    });
+    this.setState(state => ({
+      isImagePickerActive: !state.isImagePickerActive,
+    }));
   }
 
   onSelectImage(image) {
@@ -32,23 +34,28 @@ class ImageField extends React.Component {
     const { input } = this.props;
 
     return ([
-      this.state.isImagePickerActive &&
-      <C.Modal key='image-popup' onClose={this.onToggleImagePicker} boxClasses='modal__box--image-picker'>
-        <C.ImagePicker onSelectImage={this.onSelectImage} />
-      </C.Modal>
-      ,
+      this.state.isImagePickerActive && (
+        <C.Modal key='image-popup' boxClasses='modal__box--image-picker' onClose={this.onToggleImagePicker}>
+          <C.ImagePicker onSelectImage={this.onSelectImage} />
+        </C.Modal>
+      ),
       input.value
-        ? <div
+        ? (
+          <div
             key='image'
-            style={{ backgroundImage: `url('/images/${input.value}')` }}
             className='form__field form__field--image'
+            style={{ backgroundImage: `url('/images/${input.value}')` }}
             onClick={this.onToggleImagePicker}
           />
-        : <div
+        ) : (
+          <div
             key='placeholder'
             className='form__field form__field--image placeholder'
             onClick={this.onToggleImagePicker}
-          ><Translate id={tr.IMAGE_SELECT} /></div>
+          >
+            <Translate id={tr.IMAGE_SELECT} />
+          </div>
+        )
     ]);
   }
 }

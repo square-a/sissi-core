@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 export const TYPE_PICKER_TITLE = 'translations/modal/typePickerTitle';
 
 export default {

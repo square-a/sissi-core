@@ -19,7 +19,7 @@ const NavItem = ({
   title,
   type,
 }) => (
-  <Draggable draggableId={id} type={type} index={index}>
+  <Draggable draggableId={id} index={index} type={type}>
     {provided => (
       <div>
         <div
@@ -28,10 +28,12 @@ const NavItem = ({
           {...provided.dragHandleProps}
         >
           <NavLink
-            to={isActive ? backLinkArray : linkArray}
-            className='navbar__item'
             activeClassName='navbar__item--selected'
-          >{title}</NavLink>
+            className='navbar__item'
+            to={isActive ? backLinkArray : linkArray}
+          >
+            {title}
+          </NavLink>
         </div>
         {provided.placeholder}
       </div>
@@ -40,10 +42,10 @@ const NavItem = ({
 );
 
 NavItem.propTypes = {
-  isActive: PropTypes.bool,
   backLinkArray: PropTypes.array,
   id: PropTypes.string,
   index: PropTypes.number,
+  isActive: PropTypes.bool,
   linkArray: PropTypes.array,
   title: PropTypes.string,
   type: PropTypes.string,

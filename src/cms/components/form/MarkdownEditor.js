@@ -8,8 +8,8 @@ import * as C from '%/components';
 import * as tr from '%/translations';
 import { SUCCESS } from '%/constants';
 
-const mapDispatchToProps = (dispatch) => ({
-  onSelectImage: (image) => {
+const mapDispatchToProps = dispatch => ({
+  onSelectImage: image => {
     dispatch(actions.setAlert(SUCCESS, tr.IMAGE_PASTE_IN_EDITOR, { image }));
   },
 });
@@ -30,7 +30,7 @@ class MarkdownEditor extends React.Component {
   }
 
   componentDidMount() {
-    count++;
+    count += 1;
     const nodeList = document.querySelectorAll('.markdown-editor');
     const mde = new InscrybMDE({
       blockStyles: {
@@ -50,7 +50,7 @@ class MarkdownEditor extends React.Component {
           name: 'image',
           className: 'fa fa-picture-o',
           title: 'Insert Image',
-          action: function selectImage(editor) {
+          action: function selectImage() {
             this.onToggleImagePicker();
           }.bind(this),
         },
@@ -60,13 +60,13 @@ class MarkdownEditor extends React.Component {
   }
 
   componentWillUnmount() {
-    count--;
+    count -= 1;
   }
 
   onToggleImagePicker() {
-    this.setState({
-      isImagePickerActive: !this.state.isImagePickerActive,
-    });
+    this.setState(state => ({
+      isImagePickerActive: !state.isImagePickerActive,
+    }));
   }
 
   onSelectImage(image) {
@@ -78,21 +78,25 @@ class MarkdownEditor extends React.Component {
     const { input } = this.props;
 
     return ([
-      this.state.isImagePickerActive &&
-        <C.Modal
-          key={`image-picker-${count}`}
-          boxClasses='modal__box--image-picker'
-          onClose={this.onToggleImagePicker}>
-          <C.ImagePicker onSelectImage={this.onSelectImage} />
-        </C.Modal>
-      ,
-      <textarea key='markdown-editor' className='markdown-editor' {...input} />
+      this.state.isImagePickerActive
+        && (
+          <C.Modal
+            key={`image-picker-${count}`}
+            boxClasses='modal__box--image-picker'
+            onClose={this.onToggleImagePicker}
+          >
+            <C.ImagePicker onSelectImage={this.onSelectImage} />
+          </C.Modal>
+        ),
+      <textarea key='markdown-editor' className='markdown-editor' {...input} />,
     ]);
   }
 }
 
 MarkdownEditor.propTypes = {
   input: PropTypes.object,
+  placeholder: PropTypes.string,
+  onSelectImage: PropTypes.func,
 };
 
 export default connect(null, mapDispatchToProps)(MarkdownEditor);

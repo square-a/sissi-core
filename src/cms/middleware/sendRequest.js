@@ -37,13 +37,13 @@ export default (store, client = ajax, getters = selectors) => next => async acti
 
       payload.responseData = responseData;
 
-      onSuccess.forEach(method => method(store.dispatch, responseData));
+      onSuccess.forEach(fn => fn(store.dispatch, responseData));
 
       next(action);
 
-    } catch(error) {
+    } catch (error) {
       const errorCode = error[0] ? error[0].status : 500;
-      switch(errorCode) {
+      switch (errorCode) {
         case 401:
           store.dispatch(actions.resetSession());
           store.dispatch(actions.redirectToLogin());
@@ -69,4 +69,4 @@ export default (store, client = ajax, getters = selectors) => next => async acti
   } else {
     next(action);
   }
-}
+};

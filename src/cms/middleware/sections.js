@@ -4,6 +4,7 @@ import * as k from '%/constants/keywords';
 import getRandomString from '%/helpers/getRandomString';
 import * as selectors from '%/selectors';
 
+// eslint-disable-next-line consistent-return
 export default ({ dispatch, getState }) => next => action => {
   const { type, payload } = action;
 
@@ -15,9 +16,9 @@ export default ({ dispatch, getState }) => next => action => {
 
       if (allowedSectionTypes.length > 1) {
         return dispatch(actions.openModal(k.TYPE_PICKER, { pageId: payload.pageId }));
-      } else {
-        _type = allowedSectionTypes[0].name;
       }
+
+      _type = allowedSectionTypes[0].name;
     }
 
     const newSection = {
@@ -31,7 +32,7 @@ export default ({ dispatch, getState }) => next => action => {
         const { fields: itemFieldNames, minItems } = field;
         newSection[field._name] = [];
 
-        for (let i = 0; i < minItems; i++) {
+        for (let i = 0; i < minItems; i += 1) {
           const newItem = {};
           itemFieldNames.forEach(fieldName => newItem[fieldName] = '');
           newSection[field._name].push(newItem);
@@ -46,4 +47,4 @@ export default ({ dispatch, getState }) => next => action => {
   }
 
   next(action);
-}
+};

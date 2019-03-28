@@ -39,19 +39,20 @@ const FieldList = ({
     <label className='form__label'>{listLabel}</label>
     {fields.map((field, index) => (
       <C.FieldListItem
+        // eslint-disable-next-line react/no-array-index-key
+        key={index}
         canDelete={canDelete}
         field={field}
         fieldNames={fieldNames}
         index={index}
         isLastItem={index === fields.length - 1}
-        key={index}
         onDelete={onDelete}
         onMove={onMove}
       />
     ))}
     {canAdd && (
       <article className='form__list-item'>
-        <C.Button onClick={onAdd}><Translate id={tr.ADD_DATA} data={{ data: itemLabel }} /></C.Button>
+        <C.Button onClick={onAdd}><Translate data={{ data: itemLabel }} id={tr.ADD_DATA} /></C.Button>
       </article>
     )}
   </section>

@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Field, FieldArray } from 'redux-form';
+import {
+  Field,
+  FieldArray,
+} from 'redux-form';
 
 import * as k from '%/constants/keywords';
 import * as C from '%/components';
@@ -17,7 +20,7 @@ const FormFieldBuilder = ({ field, prefix }) => {
   let options = [];
   let fieldClassName = '';
 
-  switch(field.type) {
+  switch (field.type) {
     case k.LIST:
       return (
         <FieldArray
@@ -65,19 +68,20 @@ const FormFieldBuilder = ({ field, prefix }) => {
   }
 
   return (
+    /* eslint-disable react/jsx-one-expression-per-line */
     <label className='form__element'>
       <span className='form__label'>{field.label}:</span>
       <Field
         className={`form__field ${fieldClassName}`}
         component={component}
-        name={`${prefix ? prefix : ''}${field.name}`}
+        name={`${prefix || ''}${field.name}`}
         options={options}
         placeholder={field.placeholder}
         type={type}
       />
     </label>
   );
-}
+};
 
 FormFieldBuilder.propTypes = {
   field: PropTypes.object,

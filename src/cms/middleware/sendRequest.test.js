@@ -8,7 +8,7 @@ describe('middleware/sendRequest', () => {
 
   beforeEach(() => {
     mockClient = jest.fn(() => ({
-      get: mockGet
+      get: mockGet,
     }));
     mockDispatch = jest.fn();
     mockNext = jest.fn();
@@ -53,7 +53,7 @@ describe('middleware/sendRequest', () => {
       payload: {
         method: 'get',
         dataType: 'test',
-        onSuccess: []
+        onSuccess: [],
       },
     };
     mockGet = jest.fn(() => new Promise(resolve => resolve([{}, { ok: true }])));
@@ -72,7 +72,7 @@ describe('middleware/sendRequest', () => {
       payload: {
         method: 'get',
         dataType: 'test',
-        onSuccess: [successAction]
+        onSuccess: [successAction],
       },
     };
 
@@ -92,7 +92,7 @@ describe('middleware/sendRequest', () => {
       payload: {
         method: 'get',
         dataType: 'test',
-        onSuccess: [successAction]
+        onSuccess: [successAction],
       },
     };
 

@@ -4,6 +4,7 @@ import * as k from '%/constants/keywords';
 import * as selectors from '%/selectors';
 import getRandomString from '%/helpers/getRandomString';
 
+// eslint-disable-next-line consistent-return
 export default ({ dispatch, getState }) => next => action => {
   const { type, payload } = action;
 
@@ -15,9 +16,9 @@ export default ({ dispatch, getState }) => next => action => {
 
       if (allowedTypes.length > 1) {
         return dispatch(actions.openModal(k.TYPE_PICKER));
-      } else {
-        _type = allowedTypes[0].name;
       }
+
+      _type = allowedTypes[0].name;
     }
 
     const _id = getRandomString();
@@ -33,7 +34,7 @@ export default ({ dispatch, getState }) => next => action => {
         const { fields: itemFieldNames, minItems } = field;
         newPage[field._name] = [];
 
-        for (let i = 0; i < minItems; i++) {
+        for (let i = 0; i < minItems; i += 1) {
           const newItem = {};
           itemFieldNames.forEach(fieldName => newItem[fieldName] = '');
           newPage[field._name].push(newItem);
@@ -64,4 +65,4 @@ export default ({ dispatch, getState }) => next => action => {
   } else {
     next(action);
   }
-}
+};

@@ -19,5 +19,6 @@ module.exports = {
       arraysInObjects: false,
       objectsInObjects: false,
     }],
+    'react/require-default-props': 'off',
   }
 }

@@ -30,7 +30,7 @@ const Alert = ({
   <aside className='modal modal--alert'>
     <article className={`modal__box modal__box--alert ${type}`}>
       <h2 className='modal__title'><Translate id={title} /></h2>
-      <p className='modal__message'><Translate id={message} data={trData} /></p>
+      <p className='modal__message'><Translate data={trData} id={message} /></p>
       <div className='modal__button-row'>
         {allowConfirm && (
           <C.Button

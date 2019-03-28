@@ -21,7 +21,7 @@ describe('reducers/content/sections', () => {
     };
     const state = reducer(mockState, action);
 
-    expect(state).toEqual({ section1: {}, section2: {} });
+    expect(state).toEqual({ section1: {}, section2: {}});
   });
 
   it('should add a section', () => {

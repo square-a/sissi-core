@@ -10,6 +10,6 @@ export default (state = initialState, action = {}) => {
   }
 
   return state;
-}
+};
 
 export const getIsLoading = state => state.ui.loading > 0;

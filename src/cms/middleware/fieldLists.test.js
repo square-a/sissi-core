@@ -64,5 +64,4 @@ describe('middleware/fieldLists', () => {
       expect(mockAction.payload).toHaveProperty('parentId', 'abc123');
     });
   });
-
 });

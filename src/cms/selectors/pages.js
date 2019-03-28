@@ -9,7 +9,7 @@ export const getSinglePageId = createSelector(
     s.getAllPageIds,
     s.getMaxAmountOfPages,
   ],
-  (pageIds, maxAmountOfPages) => maxAmountOfPages <= 1 ? pageIds[0] : null
+  (pageIds, maxAmountOfPages) => (maxAmountOfPages <= 1 ? pageIds[0] : null)
 );
 
 export const getMaxSectionsForPage = pageId => createSelector(
@@ -17,9 +17,7 @@ export const getMaxSectionsForPage = pageId => createSelector(
     s.getPageById(pageId),
     s.getStructurePages,
   ],
-  ({ _type: pageType }, structurePages) => {
-    return structurePages[pageType] ? structurePages[pageType].maxItems : Infinity;
-  }
+  ({ _type: pageType }, structurePages) => (structurePages[pageType] ? structurePages[pageType].maxItems : Infinity)
 );
 
 export const getActivePageId = createSelector(
@@ -27,14 +25,14 @@ export const getActivePageId = createSelector(
     getLocationPageId,
     getSinglePageId,
   ],
-  (locationPageId, singlePageId) => singlePageId ? singlePageId : locationPageId
+  (locationPageId, singlePageId) => singlePageId || locationPageId
 );
 
 export const getAllowedPageTypes = createSelector(
   [
     s.getStructurePages,
   ],
-  structurePages => Object.entries(structurePages).reduce((acc, [pageType, page]) => {
+  structurePages => Object.entries(structurePages).reduce((acc, [pageType, page]) => {
     if (!page.isProtected) {
       acc.push({ name: pageType, label: page.label });
     }

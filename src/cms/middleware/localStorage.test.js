@@ -2,8 +2,8 @@ import middleware from './localStorage';
 
 describe('middleware/localStorage', () => {
   it('should write the token to the localStorage if it changed', () => {
-    const stateBefore = { login: { token: 'token before' } };
-    const stateAfter = { login: { token: 'token after' } };
+    const stateBefore = { login: { token: 'token before' }};
+    const stateAfter = { login: { token: 'token after' }};
     const mockGetState = jest.fn(() => stateAfter)
       .mockImplementationOnce(() => stateBefore);
     const mockStore = {

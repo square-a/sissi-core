@@ -185,7 +185,7 @@ describe('selectors/navigation', () => {
           });
 
           it('should use the label if there is no title in content', () => {
-            mockState.content.pages['abc123'].title = undefined;
+            mockState.content.pages.abc123.title = undefined;
             const result = selectors.getPropsForNavItem('abc123', 'pages')(mockState);
 
             expect(result).toHaveProperty('title', 'Standard page');

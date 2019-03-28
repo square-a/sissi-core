@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -8,12 +10,13 @@ import * as actions from '%/actions';
 import * as c from '%/constants';
 import * as tr from '%/translations';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   images: selectors.getAllImages(state),
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-  onUploadImage: (e) => {
+const mapDispatchToProps = dispatch => ({
+  // eslint-disable-next-line consistent-return
+  onUploadImage: e => {
     const image = e.target.files[0];
 
     if (c.validImageTypes.indexOf(image.type) === -1) {
@@ -31,6 +34,12 @@ class ImagePicker extends React.Component {
     this.openFileBrowser = this.openFileBrowser.bind(this);
   }
 
+  componentWillUnmount() {
+    if (this.fileBrowser) {
+      document.querySelector('body').removeChild(this.fileBrowser);
+    }
+  }
+
   openFileBrowser() {
     if (!this.fileBrowser) {
       this.fileBrowser = document.createElement('input');
@@ -43,12 +52,6 @@ class ImagePicker extends React.Component {
     this.fileBrowser.click();
   }
 
-  componentWillUnmount() {
-    if (this.fileBrowser) {
-      document.querySelector('body').removeChild(this.fileBrowser);
-    }
-  }
-
   render() {
     const {
       images = [],
@@ -59,20 +62,19 @@ class ImagePicker extends React.Component {
       images.map(image => (
         <div
           key={image}
-          style={{ backgroundImage: `url('/images/${image}')` }}
           className='modal__image'
+          style={{ backgroundImage: `url('/images/${image}')` }}
           onClick={() => onSelectImage(image)}
         />
-      ))
-      ,
+      )),
       <div
         key='file-browser'
-        id='file-browser-button'
         className='modal__image placeholder'
+        id='file-browser-button'
         onClick={this.openFileBrowser}
       >
         <Translate id={tr.IMAGE_UPLOAD} />
-      </div>
+      </div>,
     ];
   }
 }
@@ -80,6 +82,7 @@ class ImagePicker extends React.Component {
 ImagePicker.propTypes = {
   images: PropTypes.array,
   onSelectImage: PropTypes.func,
+  onUploadImage: PropTypes.func,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ImagePicker);

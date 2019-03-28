@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 import marked from 'marked';
 import TurndownService from 'turndown';
 

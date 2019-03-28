@@ -5,6 +5,7 @@ import * as selectors from '%/selectors';
 import * as routes from './index';
 
 export default {
+  // eslint-disable-next-line consistent-return
   onBeforeChange(dispatch, getState, { action }) {
     const isLoggedIn = selectors.getAuthToken(getState()) !== null;
     const isNavigatingToLogin = action.type === routes.ROUTE_LOGIN;
@@ -25,5 +26,5 @@ export default {
         dispatch(actions.fetchData(k.IMAGES));
       }
     }
-  }
-}
+  },
+};

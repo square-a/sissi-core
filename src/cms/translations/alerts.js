@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 export const CONFIRM_DISCARD = 'translations/modal/confirmDiscard';
 export const ERROR = 'translations/modal/error';
 export const ERROR_AUTH = 'translations/modal/errorAuth';
@@ -40,7 +41,7 @@ export default {
   ],
   [ERROR_LOGIN]: [
     "Sorry, the username or password you entered was not found.",
-    "Leider stimmt dieses Passwort oder der Nutzername nicht."
+    "Leider stimmt dieses Passwort oder der Nutzername nicht.",
   ],
   [ERROR_SERVER]: [
     "The server is not responding. Please try to reload the page! If this keeps happening contact your developer.",

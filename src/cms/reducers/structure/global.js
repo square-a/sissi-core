@@ -14,6 +14,6 @@ export default (state = initialState, action = {}) => {
   }
 
   return state;
-}
+};
 
 export const getMaxAmountOfPages = state => state.structure.global.maxItems;

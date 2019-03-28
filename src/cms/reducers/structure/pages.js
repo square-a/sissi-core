@@ -14,9 +14,9 @@ export default (state = initialState, action = {}) => {
   }
 
   return state;
-}
+};
 
 export const getStructurePages = state => state.structure.pages;
-export const getMinAmountOfSectionsForPageType = pageType => state => state.structure.pages[pageType]
-  ? state.structure.pages[pageType].minItems
-  : 0;
+export const getMinAmountOfSectionsForPageType = pageType => state => (
+  state.structure.pages[pageType] ? state.structure.pages[pageType].minItems : 0
+);

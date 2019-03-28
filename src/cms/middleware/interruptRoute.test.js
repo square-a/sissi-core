@@ -13,10 +13,10 @@ describe('middleware/interruptRoute', () => {
       dispatch: jest.fn(),
     };
     mockSelectors = {
-      getFormNames: jest.fn(() =>() => ['myForm']),
+      getFormNames: jest.fn(() => () => ['myForm']),
       isDirty: jest.fn(() => () => true),
     };
-  })
+  });
 
   it('should forward the action if the type is not SEND_REQUEST', () => {
     mockAction = { type: 'test' };

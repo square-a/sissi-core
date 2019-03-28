@@ -25,7 +25,7 @@ const Form = ({
       <C.FormFieldBuilder key={fieldName} fieldName={fieldName} />
     ))}
     <div className='form__element form__element--buttons'>
-      <C.Button onClick={onSave} classes='button--cta'>
+      <C.Button classes='button--cta' onClick={onSave}>
         <Translate id={tr.SAVE} />
       </C.Button>
       {canDelete && (
@@ -39,7 +39,7 @@ const Form = ({
 
 Form.propTypes = {
   canDelete: PropTypes.bool,
-  fields: PropTypes.array,
+  fieldNames: PropTypes.array,
   onDelete: PropTypes.func,
   onSave: PropTypes.func,
 };

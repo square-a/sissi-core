@@ -15,14 +15,13 @@ export const getPropsForNavItem = (id, type) => createSelector(
   ],
   ({ item: currentItem, parent: currentParent }, { item, parent }, maxAmountOfPages) => {
     let backLinkArray = [];
-    let linkArray;
 
     if (parent && parent.id) {
       backLinkArray.push(parent.type);
       backLinkArray.push(parent.id);
     }
 
-    linkArray = backLinkArray.concat([type, id]);
+    const linkArray = backLinkArray.concat([type, id]);
 
     if (maxAmountOfPages <= 1) {
       backLinkArray = [];
@@ -33,7 +32,7 @@ export const getPropsForNavItem = (id, type) => createSelector(
       backLinkArray,
       linkArray,
       title: (item.content && item.content.title) ? item.content.title : item.structure.label,
-    }
+    };
   }
 );
 

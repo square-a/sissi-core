@@ -15,7 +15,8 @@ describe('middleware/gatherRequestData', () => {
         method: 'post',
         formName: 'global',
         dataType: 'content',
-      }};
+      },
+    };
     mockGetFormValues = jest.fn(() => () => ({}));
     mockNext = jest.fn();
     mockStore = {
@@ -99,8 +100,10 @@ describe('middleware/gatherRequestData', () => {
           method: 'post',
           formName: 'sections-123abc',
           dataType: 'content',
-        }};
-        mockGetFormValues = jest.fn(() => () => ({ title: 'Nanana' }));
+        },
+      };
+
+      mockGetFormValues = jest.fn(() => () => ({ title: 'Nanana' }));
 
       middleware(mockStore, mockGetFormValues)(mockNext)(mockAction);
 

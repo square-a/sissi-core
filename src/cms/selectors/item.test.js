@@ -394,7 +394,7 @@ describe('selectors/item', () => {
   });
 
   describe('getItemWithParent(testId, testType)', () => {
-    let testId, testType
+    let testId, testType;
 
     describe('global', () => {
       beforeEach(() => {

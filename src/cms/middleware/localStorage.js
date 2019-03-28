@@ -4,7 +4,8 @@ export default (store, lStorage = window.localStorage) => next => action => {
 
   if (action.type === t.RESET_SESSION) {
     lStorage.removeItem('token');
-    return next(action);
+    next(action);
+    return;
   }
 
   const prevToken = store.getState().login.token || '';

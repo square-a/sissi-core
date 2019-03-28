@@ -1,3 +1,4 @@
+/* eslint-disable quotes */
 export const ADD = 'translations/buttons/add';
 export const ADD_DATA = 'translations/buttons/add_data';
 export const CANCEL = 'translations/buttons/cancel';

@@ -19,6 +19,6 @@ export default (state = initialState, action = {}) => {
   }
 
   return state;
-}
+};
 
 export const getAlert = state => state.ui.alert;

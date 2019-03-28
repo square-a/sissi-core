@@ -81,4 +81,4 @@ export const getItemWithParent = (id, type) => createSelector(
         : null,
     };
   }
-)
+);

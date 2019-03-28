@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -12,14 +14,14 @@ import * as actions from '%/actions';
 import * as C from '%/components';
 import * as tr from '%/translations';
 
-const mapDispatchToProps = (dispatch) => ({
-  onLogin: (e) => {
+const mapDispatchToProps = dispatch => ({
+  onLogin: e => {
     e.preventDefault();
     dispatch(actions.login());
   },
 });
 
-const Login = ({ loginFields, onLogin }) => (
+const Login = ({ onLogin }) => (
   <div className='login'>
     <C.SissiSvg className='login__sissi' />
     <h1><Translate id={tr.WELCOME} /></h1>
@@ -47,7 +49,7 @@ const Login = ({ loginFields, onLogin }) => (
         />
       </label>
       <div className='form__buttons'>
-        <button type='submit' className='button button--cta'>
+        <button className='button button--cta' type='submit'>
           <Translate id={tr.LOGIN} />
         </button>
       </div>
@@ -56,7 +58,6 @@ const Login = ({ loginFields, onLogin }) => (
 );
 
 Login.propTypes = {
-  loginFields: PropTypes.array,
   onLogin: PropTypes.func,
 };
 

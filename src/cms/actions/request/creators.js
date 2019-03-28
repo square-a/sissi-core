@@ -26,7 +26,16 @@ export const fetchData = dataType => {
   }
 
   return action;
-}
+};
+
+export const buildPage = () => ({
+  type: t.SEND_REQUEST,
+  payload: {
+    method: k.POST,
+    dataType: k.BUILD,
+    onSuccess: [dispatch => dispatch(setAlert(k.SUCCESS, tr.SUCCESS_PUBLISH))],
+  },
+});
 
 export const postContent = buildAfter => (dispatch, getState, selectFormNames = getFormNames) => {
   const allFormNames = selectFormNames()(getState()) || [];
@@ -42,22 +51,13 @@ export const postContent = buildAfter => (dispatch, getState, selectFormNames = 
     },
   };
   if (buildAfter) {
-    action.payload.onSuccess.push(dispatch => dispatch(buildPage()));
+    action.payload.onSuccess.push(() => dispatch(buildPage()));
   } else {
-    action.payload.onSuccess.push(dispatch => dispatch(setAlert(k.SUCCESS, tr.SUCCESS_SAVE)));
+    action.payload.onSuccess.push(() => dispatch(setAlert(k.SUCCESS, tr.SUCCESS_SAVE)));
   }
 
   dispatch(action);
 };
-
-export const buildPage = () => ({
-  type: t.SEND_REQUEST,
-  payload: {
-    method: k.POST,
-    dataType: k.BUILD,
-    onSuccess: [dispatch => dispatch(setAlert(k.SUCCESS, tr.SUCCESS_PUBLISH))],
-  },
-});
 
 export const saveImage = image => ({
   type: t.SEND_REQUEST,
@@ -67,6 +67,11 @@ export const saveImage = image => ({
     contentType: 'file',
     requestData: image,
   },
+});
+
+export const loginSuccess = ({ token }) => ({
+  type: t.LOGIN_SUCCESS,
+  payload: { token },
 });
 
 export const login = () => (dispatch, getState, selectFormValues = getFormValues) => {
@@ -79,8 +84,8 @@ export const login = () => (dispatch, getState, selectFormValues = getFormValues
         dataType: k.LOGIN,
         requestData: { username: values.username, password: values.password },
         onSuccess: [
-          (dispatch, data) => dispatch(loginSuccess(data)),
-          dispatch => dispatch(redirectToIndex()),
+          (_, data) => dispatch(loginSuccess(data)),
+          () => dispatch(redirectToIndex()),
         ],
       },
     });
@@ -88,11 +93,6 @@ export const login = () => (dispatch, getState, selectFormValues = getFormValues
     dispatch(setAlert(k.ERROR, tr.ERROR_AUTH));
   }
 };
-
-export const loginSuccess = ({ token }) => ({
-  type: t.LOGIN_SUCCESS,
-  payload: { token: token },
-});
 
 export const resetSession = () => ({
   type: t.RESET_SESSION,

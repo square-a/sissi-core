@@ -18,7 +18,7 @@ describe('adapters/ajax', () => {
       },
       json: jest.fn(() => ({})),
     };
-    window.fetch = jest.fn((uri, options) => new Promise(resolve => resolve(response)));
+    window.fetch = jest.fn(() => new Promise(resolve => resolve(response)));
 
     await requestObject.get();
 
@@ -27,7 +27,7 @@ describe('adapters/ajax', () => {
 
   it('should reject if there is a server error', async () => {
     const requestObject = ajax('http://localhost:1234');
-    window.fetch = jest.fn((uri, options) => new Promise((resolve, reject) => reject()));
+    window.fetch = jest.fn(() => new Promise((_, reject) => reject()));
 
     await expect(requestObject.get()).rejects.toHaveProperty('status', 500);
   });
@@ -43,7 +43,7 @@ describe('adapters/ajax', () => {
       body: { isParsedJson: true },
       json: jest.fn(() => ({ isParsedJSON: true })),
     };
-    window.fetch = jest.fn((uri, options) => new Promise(resolve => resolve(response)));
+    window.fetch = jest.fn(() => new Promise(resolve => resolve(response)));
 
     const answer = await requestObject.get();
     expect(answer[0]).toHaveProperty('isParsedJSON', true);
@@ -59,11 +59,11 @@ describe('adapters/ajax', () => {
         get: jest.fn(() => 'text'),
       },
     };
-    window.fetch = jest.fn((uri, options) => new Promise(resolve => resolve(response)));
+    window.fetch = jest.fn(() => new Promise(resolve => resolve(response)));
 
     try {
       await requestObject.get();
-    } catch(e) {
+    } catch (e) {
       expect(e).toHaveLength(2);
       expect(e[0]).toHaveProperty('status', 400);
     }

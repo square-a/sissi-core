@@ -10,8 +10,9 @@ export const getPropsForEditor = createSelector(
     s.getMaxAmountOfPages,
   ],
   ({ item, parent }, maxAmountOfPages) => {
-    const existingItems =
-      parent && parent.content && parent.content._items ? parent.content._items.length : 0;
+    const existingItems = (
+      parent && parent.content && parent.content._items ? parent.content._items.length : 0
+    );
     const canDelete = !item.structure.isProtected
       && parent !== null
       && parent.structure.minItems < existingItems;

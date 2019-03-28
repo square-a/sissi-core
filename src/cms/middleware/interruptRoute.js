@@ -40,4 +40,4 @@ export default (store, formSelectors = { getFormNames, isDirty }) => next => act
   }
 
   next(action);
-}
+};

@@ -22,7 +22,7 @@ describe('selectors/pages', () => {
       const result = selectors.getSinglePageId(mockState);
 
       expect(result).toBe(null);
-    })
+    });
   });
 
   describe('getMaxSectionsForPage', () => {

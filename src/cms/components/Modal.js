@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -24,8 +26,8 @@ class Modal extends React.Component {
 
     return (
       <aside
-        id={WRAPPER_ID}
         className='modal'
+        id={WRAPPER_ID}
         onClick={this.onClickWrapper}
       >
         <article className={`modal__box ${boxClasses}`}>

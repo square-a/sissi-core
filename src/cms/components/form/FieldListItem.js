@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Translate } from 'react-localize-redux';
@@ -10,19 +11,19 @@ const FieldListItem = ({
   field,
   fieldNames,
   index,
-  isFirstItem = index === 0,
+  isFirstItem = (index === 0),
   isLastItem,
   onDelete,
   onMove,
 }) => (
   <article className='form__list-item'>
-    {fieldNames.map(fieldName =>
+    {fieldNames.map(fieldName => (
       <C.FormFieldBuilder
         key={fieldName}
         fieldName={fieldName}
         prefix={`${field}.`}
       />
-    )}
+    ))}
     {(canDelete || !isFirstItem || !isLastItem) && (
       <div className='form__list-buttons'>
         {canDelete && (
@@ -50,6 +51,7 @@ FieldListItem.propTypes = {
   field: PropTypes.string,
   fieldNames: PropTypes.array,
   index: PropTypes.number,
+  isFirstItem: PropTypes.bool,
   isLastItem: PropTypes.bool,
   onDelete: PropTypes.func,
   onMove: PropTypes.func,

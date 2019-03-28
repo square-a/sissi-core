@@ -10,7 +10,7 @@ const initialState = {};
 export default (state = initialState, action = {}) => {
   const { type, payload } = action;
 
-  switch(type) {
+  switch (type) {
     case t.SEND_REQUEST:
       if (payload.dataType === k.CONTENT) {
         return payload.responseData.pages || initialState;
@@ -23,9 +23,10 @@ export default (state = initialState, action = {}) => {
         [payload.page._id]: payload.page,
       };
 
-    case t.DELETE_PAGE:
+    case t.DELETE_PAGE: {
       const { [payload.pageId]: pageToDelete, ...newState } = state;
       return newState;
+    }
 
     case t.ADD_SECTION:
       return {

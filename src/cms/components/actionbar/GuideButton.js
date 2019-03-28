@@ -6,12 +6,12 @@ import * as actions from '%/actions';
 import * as C from '%/components';
 import * as k from '%/constants/keywords';
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onOpenGuide: () => dispatch(actions.openModal(k.GUIDE)),
 });
 
 const GuideButton = ({ onOpenGuide }) => (
-  <button key='guide-button' type='button' className='actionbar__guide-button' onClick={onOpenGuide}>
+  <button key='guide-button' className='actionbar__guide-button' type='button' onClick={onOpenGuide}>
     <C.SissiSvg />
   </button>
 );

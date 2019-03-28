@@ -29,11 +29,11 @@ const ActionBar = ({
   onSave,
 }) => (
   <aside className='actionbar'>
-    <C.Button classes='button--cta' onClick={onPublish} >
+    <C.Button classes='button--cta' onClick={onPublish}>
       <Translate id={tr.PUBLISH} />
     </C.Button>
 
-    <C.Button onClick={onSave} >
+    <C.Button onClick={onSave}>
       <Translate id={tr.SAVE} />
     </C.Button>
 

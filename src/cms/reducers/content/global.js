@@ -9,7 +9,7 @@ const initialState = {};
 export default (state = initialState, action = {}) => {
   const { type, payload } = action;
 
-  switch(type) {
+  switch (type) {
     case t.SEND_REQUEST:
       if (payload.dataType === k.CONTENT) {
         return payload.responseData.global || initialState;

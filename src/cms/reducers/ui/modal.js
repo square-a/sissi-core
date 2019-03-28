@@ -16,6 +16,6 @@ export default (state = initialState, action = {}) => {
   }
 
   return state;
-}
+};
 
 export const getModalState = state => state.ui.modal;

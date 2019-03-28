@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+import {
+  DragDropContext,
+  Droppable,
+} from 'react-beautiful-dnd';
 
 const NavBar = ({
   children,
@@ -10,10 +13,10 @@ const NavBar = ({
 }) => (
   <DragDropContext onDragEnd={onDragEnd}>
     <Droppable droppableId={type} type={type}>
-      {(provided) => (
+      {provided => (
         <nav
-          className={`navbar navbar--level-${level}`}
           ref={provided.innerRef}
+          className={`navbar navbar--level-${level}`}
           {...provided.droppableProps}
         >
           {children}

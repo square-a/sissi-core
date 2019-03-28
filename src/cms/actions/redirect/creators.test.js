@@ -9,7 +9,7 @@ describe('actions/redirect', () => {
 
       expect(action).toHaveProperty('type', routes.ROUTE_INDEX);
     });
-  })
+  });
 
   describe('redirectToLogin', () => {
     it('should dispatch an action with the correct type and payload', () => {

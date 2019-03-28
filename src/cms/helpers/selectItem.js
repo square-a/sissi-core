@@ -13,4 +13,4 @@ export default (contentState, structureState, type, id) => {
     type,
     id,
   };
-}
+};

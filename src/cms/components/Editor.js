@@ -15,7 +15,6 @@ const Editor = ({
   formName,
   initialValues,
   viewLevel,
-  onDelete,
 }) => (
   <section className={`editor editor--level-${viewLevel}`}>
     {/* Do not remove the form key! */}
@@ -34,8 +33,7 @@ Editor.propTypes = {
   fieldNames: PropTypes.array,
   formName: PropTypes.string,
   initialValues: PropTypes.object,
-  level: PropTypes.number,
-  onDelete: PropTypes.func,
+  viewLevel: PropTypes.number,
 };
 
 Editor.defaultProps = {
@@ -43,8 +41,6 @@ Editor.defaultProps = {
   fieldNames: [],
   formName: '',
   initialValues: {},
-  level: 1,
-  onDelete: () => null,
 };
 
 export default connect(mapStateToProps)(Editor);

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -9,7 +10,7 @@ import * as k from '%/constants/keywords';
 import * as selectors from '%/selectors';
 import * as tr from '%/translations';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   const { type, data } = selectors.getModalState(state);
   return {
     isTypePickerOpen: type === k.TYPE_PICKER,
@@ -20,7 +21,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   onCloseTypePicker: () => dispatch(actions.closeModal()),
   onSelectType: (pageId, type) => {
     if (pageId) {
@@ -39,7 +40,7 @@ const TypePicker = ({
   onCloseTypePicker,
   onSelectType,
 }) => isTypePickerOpen && (
-  <C.Modal onClose={onCloseTypePicker} boxClasses='modal__box--type-picker'>
+  <C.Modal boxClasses='modal__box--type-picker' onClose={onCloseTypePicker}>
     <h2><Translate id={tr.TYPE_PICKER_TITLE} /></h2>
     {allowedTypes.map(type => (
       <C.Button key={type.name} classes='button--cta' onClick={() => onSelectType(pageId, type.name)}>
@@ -50,8 +51,8 @@ const TypePicker = ({
 );
 
 TypePicker.propTypes = {
-  isTypePickerOpen: PropTypes.bool,
   allowedTypes: PropTypes.array,
+  isTypePickerOpen: PropTypes.bool,
   pageId: PropTypes.string,
   onCloseTypePicker: PropTypes.func,
   onSelectType: PropTypes.func,

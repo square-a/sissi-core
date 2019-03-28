@@ -1,7 +1,10 @@
 import * as k from '%/constants/keywords';
 import * as t from '%/actions/types';
 import * as s from '%/selectors';
-import { redirectToPage, redirectToIndex } from '%/actions/redirect/creators';
+import {
+  redirectToPage,
+  redirectToIndex,
+} from '%/actions/redirect/creators';
 
 export const addPage = pageType => ({
   type: t.ADD_PAGE,
@@ -18,17 +21,6 @@ export const addListItem = listName => ({
   payload: { listName },
 });
 
-export const deleteItem = () => (dispatch, getState) => {
-  const { item, parent } = s.getCurrentItemBlueprintWithParent(getState());
-  if (item.type === k.SECTIONS) {
-    dispatch(deleteSection(parent.id, item.id));
-    dispatch(redirectToPage(parent.id));
-  } else {
-    dispatch(deletePage(item.id));
-    dispatch(redirectToIndex());
-  }
-}
-
 export const deletePage = pageId => ({
   type: t.DELETE_PAGE,
   payload: { pageId },
@@ -39,6 +31,17 @@ export const deleteSection = (pageId, sectionId) => ({
   payload: { pageId, sectionId },
 });
 
+export const deleteItem = () => (dispatch, getState) => {
+  const { item, parent } = s.getCurrentItemBlueprintWithParent(getState());
+  if (item.type === k.SECTIONS) {
+    dispatch(deleteSection(parent.id, item.id));
+    dispatch(redirectToPage(parent.id));
+  } else {
+    dispatch(deletePage(item.id));
+    dispatch(redirectToIndex());
+  }
+};
+
 export const deleteListItem = (listName, itemIndex) => ({
   type: t.DELETE_LIST_ITEM,
   payload: { listName, itemIndex },
@@ -46,5 +49,10 @@ export const deleteListItem = (listName, itemIndex) => ({
 
 export const dragItem = (itemType, from, to, pageId) => ({
   type: t.DRAG_ITEM,
-  payload: { itemType, from, to, pageId },
+  payload: {
+    itemType,
+    from,
+    to,
+    pageId,
+  },
 });

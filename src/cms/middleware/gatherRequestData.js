@@ -6,7 +6,7 @@ import * as k from '%/constants/keywords';
 import * as selectors from '%/selectors';
 import { transformToHtml } from '%/helpers/markdownHtmlConverter';
 
-export default ({ dispatch, getState }, selectFormValues = getFormValues) => next => action => {
+export default ({ getState }, selectFormValues = getFormValues) => next => action => {
   const { type, payload } = action;
   const isPostRequest = type === t.SEND_REQUEST && payload.method === k.POST;
 
@@ -32,6 +32,7 @@ export default ({ dispatch, getState }, selectFormValues = getFormValues) => nex
     const newContent = _merge({}, selectors.getContent(state), contentUpdate);
     const transformedData = transformToHtml(newContent, selectors.getFields(state));
 
+    // eslint-disable-next-line no-param-reassign
     action.payload.requestData = transformedData;
   }
   next(action);

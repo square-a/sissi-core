@@ -5,21 +5,21 @@ export default {
     title: 'Test Project Title',
   },
   pages: {
-    'abc123': {
+    abc123: {
       _id: 'abc123',
       _items: ['345def', '123abc'],
       _type: 'standard',
       path: '',
       title: 'Welcome',
     },
-    'def345': {
+    def345: {
       _id: 'def345',
       _items: ['123abc'],
       _type: 'gallery',
       path: 'photos',
       title: 'My Album',
     },
-    'qwe567': {
+    qwe567: {
       _id: 'qwe567',
       _type: 'team',
       path: 'about-us',
