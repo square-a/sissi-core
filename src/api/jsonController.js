@@ -10,31 +10,32 @@ const filePaths = {
   structure: path.join(process.cwd(), 'structure.json'),
 };
 
-export function readJson(fileName) {
-  return async (req, res) => {
-    try {
-      const file = await readFileAsync(filePaths[fileName] || `${fileName}.json`);
-      const json = JSON.parse(file);
-      res.send(json);
+module.exports = {
+  readJson(fileName) {
+    return async (req, res) => {
+      try {
+        const file = await readFileAsync(filePaths[fileName] || `${fileName}.json`);
+        const json = JSON.parse(file);
+        res.send(json);
 
-    } catch (error) {
-      res.send({});
-    }
-  };
-}
+      } catch (error) {
+        res.send({});
+      }
+    };
+  },
+  writeJson(fileName) {
+    return async (req, res) => {
+      const jsonData = req.body;
+      try {
+        await writeFileAsync(
+          filePaths[fileName] || path.join(process.cwd(), `${fileName}.json`),
+          JSON.stringify(jsonData, null, 2)
+        );
+        res.send(jsonData);
 
-export function writeJson(fileName) {
-  return async (req, res) => {
-    const jsonData = req.body;
-    try {
-      await writeFileAsync(
-        filePaths[fileName] || path.join(process.cwd(), `${fileName}.json`),
-        JSON.stringify(jsonData, null, 2)
-      );
-      res.send(jsonData);
-
-    } catch (error) {
-      res.sendStatus(500);
-    }
-  };
-}
+      } catch (error) {
+        res.sendStatus(500);
+      }
+    };
+  },
+};

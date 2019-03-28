@@ -1,58 +1,49 @@
 const fs = require('fs');
 const path = require('path');
-const { execFile } = require('child_process');
 
-const HASH_FILE_NAME = '.sthash';
-const hashPath = path.join(process.cwd(), HASH_FILE_NAME);
+const Content = require('@/migrations/Content');
+const readJson = require('@/utils/readJson');
+const structureHash = require('@/utils/structureHash');
 
-const pkgPath = path.join(__dirname, '..');
-const ownPkgBin = path.join(pkgPath, 'node_modules/.bin/sissi-moves');
-const parentPkgBin = path.join(pkgPath, '..', '.bin/sissi-moves');
+const contentPath = path.join(process.cwd(), 'content.json');
+const structurePath = path.join(process.cwd(), 'structure.json');
 
-const movesBin = fs.existsSync(ownPkgBin) ? ownPkgBin : parentPkgBin;
-
-export default function migrateContent() {
-  return new Promise((resolve, reject) => {
-    let prevHash = '';
-    try {
-      prevHash = fs.readFileSync(hashPath, 'utf-8').trim();
-    // eslint-disable-next-line no-empty
-    } catch (e) {}
-
-    execFile(movesBin, [
-      'hash',
-    ], (error, stdout, stderr) => {
-      if (error || stderr) {
-        return reject(error || stderr);
-      }
-      const newHash = stdout.trim();
-
-      if (newHash === prevHash) {
-        return resolve();
-      }
-
-      execFile(movesBin, [
-        'migrate',
-      ], (error, stdout, stderr) => {
-        if (error || stderr) {
-          return reject(error || stderr);
-        }
-        if (stdout) {
-          console.log(stdout);
-        }
-        resolve();
-      });
-    });
-  });
-}
-
-export async function migrateContentMiddleware(req, res, next) {
-  try {
-    await migrateContent();
-    next();
-
-  } catch (error) {
-    console.log(error);
-    res.sendStatus(500);
+module.exports = async function migrateContent() {
+  if (!structureHash.hasStructureChanges()) {
+    return;
   }
-}
+
+  const { error: strError, file: structure } = readJson(structurePath);
+  if (strError) {
+    console.log(strError);
+    return;
+  }
+
+  const { error: cntError, file: content } = readJson(contentPath, true);
+  if (cntError) {
+    console.log(cntError);
+    return;
+  }
+
+  const newContent = new Content(content, structure);
+
+  newContent
+    .migratePages()
+    .migrateSections()
+    .migrateFields();
+
+  const oldContentStr = JSON.stringify(content);
+  const isInitialContent = oldContentStr === '{}';
+  const hasContentChanged = oldContentStr !== JSON.stringify(newContent.getContent());
+
+  if (hasContentChanged) {
+    console.log('New content.json created.');
+
+    if (!isInitialContent) {
+      fs.copyFileSync(contentPath, `${contentPath}.backup`);
+      console.log('Backup saved as content.json.backup');
+    }
+
+    fs.writeFileSync(contentPath, JSON.stringify(newContent.getContent(), null, 2));
+  }
+};

@@ -22,19 +22,19 @@ const jwtStrategy = new Strategy(jwtParams, (payload, next) => {
 
 passport.use(jwtStrategy);
 
-export function init() {
-  return passport.initialize();
-}
+module.exports = {
+  init() {
+    return passport.initialize();
+  },
+  authenticate() {
+    return passport.authenticate('jwt', { session: false });
+  },
+  login(username, password) {
+    const user = config.users.find(u => u.username === username);
 
-export function authenticate() {
-  return passport.authenticate('jwt', { session: false });
-}
-
-export function login(username, password) {
-  const user = config.users.find(u => u.username === username);
-
-  if (user && user.password === password) {
-    return jwt.sign({ phrase: user.phrase }, config.JWT.secret);
-  }
-  return false;
-}
+    if (user && user.password === password) {
+      return jwt.sign({ phrase: user.phrase }, config.JWT.secret);
+    }
+    return false;
+  },
+};

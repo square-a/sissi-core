@@ -4,7 +4,7 @@ const express = require('express');
 const { authenticate, login } = require('./authService');
 const { getAllImages, saveImage } = require('./imageController');
 const { readJson, writeJson } = require('./jsonController');
-const { migrateContentMiddleware } = require('./migrateContent');
+const migrateContent = require('./migrateContent');
 
 // eslint-disable-next-line new-cap
 const router = express.Router();
@@ -18,7 +18,16 @@ router.route('/structure')
 router.route('/content')
   .get(
     authenticate(),
-    migrateContentMiddleware,
+    async (req, res, next) => {
+      try {
+        await migrateContent();
+        next();
+
+      } catch (error) {
+        console.log(error);
+        res.sendStatus(500);
+      }
+    },
     readJson('content')
   )
   .post(
@@ -85,4 +94,4 @@ router.route('/build')
     }
   );
 
-export default router;
+module.exports = router;

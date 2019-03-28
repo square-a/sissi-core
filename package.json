@@ -88,9 +88,8 @@
     "build:cms": "export NODE_ENV=production && export SISSI_CMS=true && webpack --config lib/config/webpack.js",
     "dev:cms": "export SISSI_CMS=true && webpack-dev-server --config lib/config/webpack.js",
     "test": "eslint .",
-
-    "watch": "webpack --watch --config lib/config/webpack.js",
-    "server": "webpack-dev-server --config lib/config/webpack.js",
-    "webpack": "export NODE_ENV=production && webpack --config lib/config/webpack.js"
+    "sissi:dev": "webpack-dev-server --config lib/config/webpack.js",
+    "sissi:build": "export NODE_ENV=production && webpack --config lib/config/webpack.js",
+    "sissi:api": "export NODE_ENV=production && node bin/run"
   }
 }

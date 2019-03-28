@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-export function readJson(path, createIfNotExists) {
+module.exports = function readJson(path, createIfNotExists) {
   try {
     const file = fs.readFileSync(path);
     return {
@@ -31,4 +31,4 @@ export function readJson(path, createIfNotExists) {
       error: 'Couldn\'t read file.',
     };
   }
-}
+};
