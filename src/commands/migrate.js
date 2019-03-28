@@ -7,17 +7,18 @@ const readJson = require('@/utils/readJson');
 const contentPath = path.join(process.cwd(), 'content.json');
 const structurePath = path.join(process.cwd(), 'structure.json');
 
+// eslint-disable-next-line consistent-return
 module.exports = async function migrate() {
   const { error: strError, file: structure } = readJson(structurePath);
   if (strError) {
     console.log(strError);
-    return null;
+    return;
   }
 
   const { error: cntError, file: content } = readJson(contentPath, true);
   if (cntError) {
     console.log(cntError);
-    return null;
+    return;
   }
 
   const newContent = new Content(content, structure);
@@ -38,6 +39,7 @@ module.exports = async function migrate() {
       console.log('Backup saved as content.json.backup');
     }
 
+    // eslint-disable-next-line consistent-return
     return JSON.stringify(newContent.getContent(), null, 2);
   }
 };

@@ -13,7 +13,8 @@ try {
 export function getAllImages(req, res) {
   fs.readdir(imageDirectory, (error, files) => {
     if (error) {
-      return res.sendStatus(500);
+      res.sendStatus(500);
+      return;
     }
     res.send(files);
   });

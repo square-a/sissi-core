@@ -57,6 +57,6 @@ export const getAllowedSectionTypesForPageId = pageId => createSelector(
     } else {
       allowedTypes = Object.keys(structureSections);
     }
-    return allowedTypes.map(type =>  ({ name: type, label: structureSections[type].label }));
+    return allowedTypes.map(type => ({ name: type, label: structureSections[type].label }));
   }
 );

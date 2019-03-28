@@ -55,7 +55,7 @@ class ImageField extends React.Component {
           >
             <Translate id={tr.IMAGE_SELECT} />
           </div>
-        )
+        ),
     ]);
   }
 }

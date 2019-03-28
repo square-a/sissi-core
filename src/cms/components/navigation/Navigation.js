@@ -25,7 +25,7 @@ const mapDispatchToProps = dispatch => ({
     if (destination) {
       dispatch(actions.dragItem(type, source.index, destination.index, pageId));
     }
-},
+  },
 });
 
 const Navigation = ({

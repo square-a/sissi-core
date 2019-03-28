@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/jsx-one-expression-per-line */
 import React from 'react';
@@ -6,8 +7,7 @@ const GuideContent = () => ([
   <div key='guide-intro' className='guide__intro' id='guide-top'>
     <h1>Hi, I'm sissi.</h1>
     <h2>I am the creator of this tool – and here to help you. I can offer my advice on all these topics:</h2>
-  </div>
-  ,
+  </div>,
   <div key='guide-content' className='guide__content'>
     <ul className='guide__main-list'>
       <li className='guide__main-list__item'><a href='#general-usage'>General Usage</a></li>
@@ -99,7 +99,7 @@ const GuideContent = () => ([
       <p>I hope I've been helpful!</p>
       <p>If you'd like to know more about me you can find me on <a href='https://github.com/square-a/sissi'>Github</a> or visit my parents at <a href='https://a-square.eu'>A Square</a>.</p>
     </footer>
-  </div>
+  </div>,
 ]);
 
 export default GuideContent;

@@ -43,7 +43,7 @@ export default ({ dispatch, getState }) => next => action => {
       } else {
         newPage[field._name] = '';
       }
-    })
+    });
 
     payload.page = newPage;
     next(action);

@@ -2,7 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { withLocalize, getActiveLanguage } from 'react-localize-redux';
+import {
+  withLocalize,
+  getActiveLanguage,
+} from 'react-localize-redux';
 
 import * as C from '%/components';
 import * as selectors from '%/selectors';

@@ -38,8 +38,8 @@ describe('selectors/structure/fields', () => {
     it('should return the fields structure object', () => {
       const value = selectors.getFields(mockState);
 
-      expect(value).toHaveProperty('title')
-      expect(value).toHaveProperty('people')
+      expect(value).toHaveProperty('title');
+      expect(value).toHaveProperty('people');
     });
   });
 

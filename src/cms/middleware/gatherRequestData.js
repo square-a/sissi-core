@@ -36,4 +36,4 @@ export default ({ getState }, selectFormValues = getFormValues) => next => actio
     action.payload.requestData = transformedData;
   }
   next(action);
-}
+};

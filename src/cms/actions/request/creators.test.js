@@ -22,7 +22,7 @@ describe('actions/request', () => {
 
       expect(mockDispatch.mock.calls).toHaveLength(1);
 
-      const action = mockDispatch.mock.calls[0][0]
+      const action = mockDispatch.mock.calls[0][0];
 
       expect(action).toHaveProperty('type', t.SEND_REQUEST);
       expect(action.payload).toHaveProperty('method', 'post');
@@ -54,7 +54,7 @@ describe('actions/request', () => {
 
       expect(mockDispatch.mock.calls).toHaveLength(1);
 
-      const action = mockDispatch.mock.calls[0][0]
+      const action = mockDispatch.mock.calls[0][0];
 
       expect(action).toHaveProperty('type', t.SEND_REQUEST);
       expect(action.payload).toHaveProperty('method', 'post');

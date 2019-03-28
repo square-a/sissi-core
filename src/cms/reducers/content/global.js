@@ -63,6 +63,6 @@ export default (state = initialState, action = {}) => {
     default:
       return state;
   }
-}
+};
 
 export const getAllPageIds = state => state.content.global._items || [];

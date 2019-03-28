@@ -22,7 +22,7 @@ describe('reducers/content/pages', () => {
     };
     const state = reducer(mockState, action);
 
-    expect(state).toEqual({ page1: {}, page2: {} });
+    expect(state).toEqual({ page1: {}, page2: {}});
   });
 
   it('should add a page', () => {
@@ -68,7 +68,12 @@ describe('reducers/content/pages', () => {
   it('should move a section', () => {
     const action = {
       type: t.DRAG_ITEM,
-      payload: { itemType: k.SECTIONS, pageId: 'abc123', from: 0, to: 1 },
+      payload: {
+        itemType: k.SECTIONS,
+        pageId: 'abc123',
+        from: 0,
+        to: 1,
+      },
     };
     const state = reducer(mockState, action);
 
@@ -82,7 +87,7 @@ describe('reducers/content/pages', () => {
         parentType: 'pages',
         parentId: 'qwe567',
         listName: 'people',
-        listItem: { title: '', image: ''},
+        listItem: { title: '', image: '' },
       },
     };
     const state = reducer(mockState, action);

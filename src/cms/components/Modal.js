@@ -34,7 +34,7 @@ class Modal extends React.Component {
           {children}
         </article>
       </aside>
-    )
+    );
   }
 }
 
