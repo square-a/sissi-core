@@ -1,23 +1,23 @@
-import jwt from 'jsonwebtoken'
-import passport from 'passport'
-import { Strategy, ExtractJwt } from 'passport-jwt'
+const jwt = require('jsonwebtoken');
+const passport = require('passport');
+const { Strategy, ExtractJwt } = require('passport-jwt');
 
 const config = require(`${process.cwd()}/config.json`);
 
 const jwtParams = {
   secretOrKey: config.JWT.secret,
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken()
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 };
 
 const jwtStrategy = new Strategy(jwtParams, (payload, next) => {
   const { phrase } = payload;
-  const user = config.users.find(user => user.phrase === phrase);
+  const user = config.users.find(u => u.phrase === phrase);
 
   if (user) {
     return next(null, payload);
-  } else {
-    return next(new Error('Wrong credentials!'), null);
   }
+
+  return next(new Error('Wrong credentials!'), null);
 });
 
 passport.use(jwtStrategy);
@@ -31,7 +31,7 @@ export function authenticate() {
 }
 
 export function login(username, password) {
-  const user = config.users.find(user => user.username === username);
+  const user = config.users.find(u => u.username === username);
 
   if (user && user.password === password) {
     return jwt.sign({ phrase: user.phrase }, config.JWT.secret);

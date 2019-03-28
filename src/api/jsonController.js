@@ -1,6 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import { promisify } from 'util';
+const fs = require('fs');
+const path = require('path');
+const { promisify } = require('util');
 
 const readFileAsync = promisify(fs.readFile);
 const writeFileAsync = promisify(fs.writeFile);
@@ -8,7 +8,7 @@ const writeFileAsync = promisify(fs.writeFile);
 const filePaths = {
   content: path.join(process.cwd(), 'content.json'),
   structure: path.join(process.cwd(), 'structure.json'),
-}
+};
 
 export function readJson(fileName) {
   return async (req, res) => {
@@ -16,10 +16,11 @@ export function readJson(fileName) {
       const file = await readFileAsync(filePaths[fileName] || `${fileName}.json`);
       const json = JSON.parse(file);
       res.send(json);
-    } catch(error) {
+
+    } catch (error) {
       res.send({});
     }
-  }
+  };
 }
 
 export function writeJson(fileName) {
@@ -31,8 +32,9 @@ export function writeJson(fileName) {
         JSON.stringify(jsonData, null, 2)
       );
       res.send(jsonData);
-    } catch(error) {
+
+    } catch (error) {
       res.sendStatus(500);
     }
-  }
+  };
 }

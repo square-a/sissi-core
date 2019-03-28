@@ -1,6 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import { execFile } from 'child_process';
+const fs = require('fs');
+const path = require('path');
+const { execFile } = require('child_process');
 
 const HASH_FILE_NAME = '.sthash';
 const hashPath = path.join(process.cwd(), HASH_FILE_NAME);
@@ -16,7 +16,8 @@ export default function migrateContent() {
     let prevHash = '';
     try {
       prevHash = fs.readFileSync(hashPath, 'utf-8').trim();
-    } catch(e) {}
+    // eslint-disable-next-line no-empty
+    } catch (e) {}
 
     execFile(movesBin, [
       'hash',
@@ -50,8 +51,8 @@ export async function migrateContentMiddleware(req, res, next) {
     await migrateContent();
     next();
 
-  } catch(error) {
+  } catch (error) {
     console.log(error);
-    return res.sendStatus(500)
+    res.sendStatus(500);
   }
 }

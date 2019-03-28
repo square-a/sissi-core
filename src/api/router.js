@@ -1,11 +1,12 @@
-import { spawn } from 'child_process';
-import express from 'express';
+const { spawn } = require('child_process');
+const express = require('express');
 
-import { authenticate, login } from './authService';
-import { getAllImages, saveImage } from './imageController';
-import { readJson, writeJson } from './jsonController';
-import { migrateContentMiddleware } from './migrateContent';
+const { authenticate, login } = require('./authService');
+const { getAllImages, saveImage } = require('./imageController');
+const { readJson, writeJson } = require('./jsonController');
+const { migrateContentMiddleware } = require('./migrateContent');
 
+// eslint-disable-next-line new-cap
 const router = express.Router();
 
 router.route('/structure')
@@ -29,14 +30,17 @@ router.route('/login')
   .post((req, res) => {
     const { username, password } = req.body;
     let token;
+
     try {
       token = login(username, password);
-    } catch(error) {
-      return res.sendStatus(500);
+    } catch (error) {
+      res.sendStatus(500);
+      return;
     }
 
     if (!token) {
-      return res.sendStatus(403);
+      res.sendStatus(403);
+      return;
     }
 
     res.status(200).send({ token });
@@ -59,20 +63,21 @@ router.route('/build')
       let isErrored = false;
       const child = spawn('sissi', ['build'], { cwd: process.cwd() });
 
-      child.stderr.on('data', (data) => {
+      child.stderr.on('data', data => {
         res.sendStatus(422);
         isErrored = true;
         console.log(data.toString());
       });
 
-      child.stdout.on('data', (data) => console.log(data.toString()));
+      child.stdout.on('data', data => console.log(data.toString()));
 
-      child.on('close', (code) => {
+      child.on('close', code => {
         if (isErrored) {
           return;
         }
         if (code !== 0) {
-          return res.sendStatus(422);
+          res.sendStatus(422);
+          return;
         }
 
         res.sendStatus(200);
