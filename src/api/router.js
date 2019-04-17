@@ -1,8 +1,7 @@
 const express = require('express');
-const webpack = require('webpack');
 
 const snapshot = require('@/commands/snapshot');
-const webpackConfig = require('@/config/webpack');
+const webpack = require('@/commands/webpack');
 const { authenticate, login } = require('./authService');
 const { getAllImages, saveImage } = require('./imageController');
 const { readJson, writeJson } = require('./jsonController');
@@ -71,23 +70,20 @@ router.route('/build')
   .post(
     authenticate(),
     async (req, res) => {
-      await webpack(webpackConfig, async (err, stats) => {
-        try {
-          if (err) {
-            throw err;
-          } else if (stats.hasErrors()) {
-            const info = stats.toJson();
-            throw info.errors;
-          }
+      if (process.env.NODE_ENV === 'development') {
+        res.sendStatus(422);
+        return;
+      }
 
-          await snapshot();
-          res.sendStatus(200);
+      try {
+        await webpack('production');
+        await snapshot();
+        res.sendStatus(200);
 
-        } catch (error) {
-          console.log(error);
-          res.sendStatus(422);
-        }
-      });
+      } catch (error) {
+        console.log(error);
+        res.sendStatus(422);
+      }
     }
   );
 

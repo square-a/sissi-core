@@ -7,4 +7,10 @@ const argv = require('minimist')(process.argv.slice(2));
 const { _: args } = argv;
 const flags = { ...argv, _: undefined };
 
-require('../lib/api')(args, flags);
+if (args.includes('dev')) {
+  process.env.NODE_ENV = 'development';
+} else if (args.includes('start')) {
+  process.env.NODE_ENV = 'production';
+}
+
+require('../lib/run')(args, flags);

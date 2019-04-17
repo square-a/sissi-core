@@ -14,7 +14,7 @@ const router = require('./router');
 const cmsDir = path.join(__dirname, '../..', cmsConfig.publicDir);
 const imageDirectory = path.join(process.cwd(), 'public', 'images');
 
-module.exports = async function run() {
+module.exports = async function startCms() {
   const app = express();
 
   app.use(init());

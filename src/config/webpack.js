@@ -5,7 +5,9 @@ const postcssPresetEnv = require('postcss-preset-env');
 
 let config = require('@/config');
 
-if (process.env.SISSI_CMS) {
+const isSissiCms = process.env.SISSI_CMS != null;
+
+if (isSissiCms) {
   config = require('@/config/cms');
 }
 
@@ -27,10 +29,12 @@ module.exports = {
     library: config.entryComponent,
     libraryTarget: 'umd',
   },
-  devtool: isProduction ? false : 'source-maps',
+  devtool: (isSissiCms && !isProduction) ? 'source-maps' : false,
   devServer: {
     contentBase: publicPath,
     port: config.devPort,
+    stats: isSissiCms ? 'normal' : 'none',
+    noInfo: !isSissiCms,
   },
   mode: isProduction ? 'production' : 'development',
   module: {
