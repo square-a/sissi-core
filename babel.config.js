@@ -1,7 +1,5 @@
 const options = {
-  ignore: [
-    'src/__testSetup__',
-  ],
+  ignore: [],
   presets: [
     [
       '@babel/preset-env',
@@ -29,8 +27,12 @@ const options = {
   ],
 };
 
-if (!process.env.SISSI_CMS) { // will be processed by webpack
+if (!process.env.SISSI_CMS && process.env.NODE_ENV !== 'test') { // will be processed by webpack
   options.ignore.push('src/cms');
+}
+
+if (process.env.NODE_ENV !== 'test') {
+  options.ignore.push('src/__testSetup__');
 }
 
 module.exports = options;

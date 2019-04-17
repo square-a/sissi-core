@@ -1,35 +1,25 @@
 module.exports = {
   collectCoverageFrom: [
-    'src/**/*.{js,jsx,mjs}',
+    'src/**/*.{js,jsx}',
   ],
-  setupFiles: [
-    '<rootDir>/config/polyfills.js',
-  ],
-  setupTestFrameworkScriptFile: '<rootDir>/src/__testSetup__/setup.js',
+  setupFilesAfterEnv: ['<rootDir>/src/__testSetup__/setup.js'],
   testMatch: [
-    '<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}',
-    '<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}',
+    '<rootDir>/src/**/__tests__/**/*.{js,jsx}',
+    '<rootDir>/src/**/?(*.)(spec|test).{js,jsx}',
   ],
-  testEnvironment: 'node',
-  testURL: 'http://localhost',
   transform: {
-    '^.+\\.(js|jsx|mjs)$': '<rootDir>/node_modules/babel-jest',
-    '^.+\\.css$': '<rootDir>/config/jest/cssTransform.js',
-    '^(?!.*\\.(js|jsx|mjs|css|json)$)': '<rootDir>/config/jest/fileTransform.js',
+    '^.+\\.(js|jsx)$': '<rootDir>/node_modules/babel-jest',
   },
   transformIgnorePatterns: [
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx|mjs)$',
   ],
   moduleNameMapper: {
-    '^@(.*)$': '<rootDir>/src$1',
+    '^@/(.*)$': '<rootDir>/src$1',
+    '^%/(.*)$': '<rootDir>/src/cms$1',
   },
   moduleFileExtensions: [
-    'web.js',
-    'mjs',
     'js',
     'json',
-    'web.jsx',
     'jsx',
-    'node',
   ],
 };

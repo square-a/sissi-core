@@ -28,10 +28,10 @@ export function makeRequest(url, options) {
 
 export default function ajax(url, token, contentType) {
   const options = {};
-  options.headers = new Headers();
+  options.headers = {};
 
   if (token) {
-    options.headers.append('authorization', `Bearer ${token}`);
+    options.headers.authorization = `Bearer ${token}`;
   }
 
   return {
@@ -42,11 +42,11 @@ export default function ajax(url, token, contentType) {
     post(body) {
       options.method = 'POST';
       if (contentType === 'json') {
-        options.headers.append('Content-Type', 'application/json');
+        options.headers['Content-Type'] = 'application/json';
         options.body = JSON.stringify(body);
       } else if (contentType === 'file') {
         const formData = new FormData();
-        options.headers.append('enctype', 'multipart/form-data');
+        options.headers.enctype = 'multipart/form-data';
         formData.append('file', body);
         options.body = formData;
       }
