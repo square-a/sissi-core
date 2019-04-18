@@ -32,6 +32,8 @@ module.exports = {
   devtool: (isSissiCms && !isProduction) ? 'source-maps' : false,
   devServer: {
     contentBase: publicPath,
+    publicPath: '/',
+    historyApiFallback: true,
     port: config.devPort,
     stats: isSissiCms ? 'normal' : 'none',
     noInfo: !isSissiCms,
