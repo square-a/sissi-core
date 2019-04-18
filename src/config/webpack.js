@@ -35,7 +35,7 @@ module.exports = {
     publicPath: '/',
     historyApiFallback: true,
     port: config.devPort,
-    stats: isSissiCms ? 'normal' : 'none',
+    stats: isSissiCms ? 'normal' : 'errors-only',
     noInfo: !isSissiCms,
   },
   mode: isProduction ? 'production' : 'development',
