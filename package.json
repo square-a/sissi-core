@@ -89,7 +89,7 @@
     "build": "npm run clear && npm run build:core && npm run build:cms",
     "build:core": "export NODE_ENV=production && babel src -d lib",
     "build:cms": "export NODE_ENV=production && export SISSI_CMS=true && webpack --config lib/config/webpack.js",
-    "dev:cms": "export SISSI_CMS=true && node bin/run dev",
+    "dev:cms": "export NODE_ENV=development && export SISSI_CMS=true && node lib/dev.js",
     "lint": "eslint .",
     "test": "jest .",
     "prepublishOnly": "npm run lint && npm run test && npm run build"

@@ -2,7 +2,15 @@ const path = require('path');
 const fs = require('fs');
 const hash = require('shorthash');
 
-const imageDirectory = path.join(process.cwd(), 'public', 'images');
+let config = require('@/config');
+
+const isSissiCms = process.env.SISSI_CMS != null;
+
+if (isSissiCms) {
+  config = require('@/config/cms');
+}
+
+const imageDirectory = path.join(process.cwd(), config.publicDir, 'images');
 
 try {
   fs.statSync(imageDirectory);

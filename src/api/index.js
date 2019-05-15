@@ -5,17 +5,25 @@ const cors = require('cors');
 const fileUpload = require('express-fileupload');
 const chalk = require('chalk');
 
-const config = require('@/config');
 const cmsConfig = require('@/config/cms');
 const { init } = require('./authService');
 const migrateContent = require('./migrateContent');
 const router = require('./router');
 
-const cmsDir = path.join(__dirname, '../..', cmsConfig.publicDir);
-const imageDirectory = path.join(process.cwd(), 'public', 'images');
+let config = require('@/config');
 
-module.exports = async function startCms() {
+const isSissiCms = process.env.SISSI_CMS != null;
+
+if (isSissiCms) {
+  config = require('@/config/cms');
+}
+
+const cmsDir = path.join(__dirname, '../..', cmsConfig.publicDir);
+const imageDirectory = path.join(process.cwd(), config.publicDir, 'images');
+
+module.exports = async function startCms(serveFrontend = true) {
   const app = express();
+  let message = `API running on ${chalk.underline(`http://localhost:${config.cmsPort}/api`)}`;
 
   app.use(init());
   app.use(bodyParser.json());
@@ -23,9 +31,13 @@ module.exports = async function startCms() {
   app.use(fileUpload());
 
   app.use('/api', router);
-  app.use('/', express.static(cmsDir));
   app.use('/images', express.static(imageDirectory));
-  app.get('*', (req, res) => res.sendFile(path.join(cmsDir, `${cmsConfig.tmpName}.html`)));
+
+  if (serveFrontend) {
+    message = `Visit the CMS at ${chalk.underline(`http://localhost:${config.cmsPort}`)}`;
+    app.use('/', express.static(cmsDir));
+    app.get('*', (req, res) => res.sendFile(path.join(cmsDir, `${cmsConfig.tmpName}.html`)));
+  }
 
   try {
     await migrateContent();
@@ -35,5 +47,5 @@ module.exports = async function startCms() {
     return;
   }
 
-  app.listen(config.cmsPort, () => console.log(`Visit the CMS at ${chalk.underline(`http://localhost:${config.cmsPort}`)}`));
+  app.listen(config.cmsPort, () => console.log(message));
 };

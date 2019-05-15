@@ -4,3 +4,12 @@
 /lib-cms/sissi-script.js
 /lib-cms/sissi-styles.css
 /lib-cms/index.html
+
+# used for developing the cms
+/lib-cms/images
+/.sissi
+/.sthash
+/config.json
+/content.json
+/content.json.backup
+/structure.json

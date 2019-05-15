@@ -7,7 +7,7 @@ import * as selectors from '%/selectors';
 import * as tr from '%/translations';
 
 const API_URL = process.env.NODE_ENV === 'development'
-  ? 'http://localhost:3010/api'
+  ? 'http://localhost:5010/api'
   : `${window.location.origin}/api`;
 
 export default (store, client = ajax, getters = selectors) => next => async action => {

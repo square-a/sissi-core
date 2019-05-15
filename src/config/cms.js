@@ -4,6 +4,6 @@ module.exports = {
   htmlInName: 'cms',
   tmpDir: '',
   tmpName: 'index',
-  devPort: 3000,
-  cmsPort: 3010,
+  devPort: 5000,
+  cmsPort: 5010,
 };

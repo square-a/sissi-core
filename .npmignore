@@ -1,3 +1,11 @@
 /src
 /sissi.png
+
+# used for developing the cms
+/lib-cms/images
 /.sissi
+/.sthash
+/config.json
+/content.json
+/content.json.backup
+/structure.json
