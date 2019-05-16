@@ -30,7 +30,6 @@
     "inscrybmde": "^1.11.6",
     "jest": "^24.7.1",
     "lodash.merge": "^4.6.1",
-    "marked": "^0.6.2",
     "react-beautiful-dnd": "^10.1.1",
     "react-localize-redux": "^3.5.2",
     "react-redux": "^7.0.3",
