@@ -35,7 +35,7 @@ const FormFieldBuilder = ({ field, prefix }) => {
 
     case k.CHOICE:
       component = C.Select;
-      options = field.choices;
+      options = field.options;
       break;
 
     case k.DATE:
