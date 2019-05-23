@@ -50,4 +50,12 @@ describe('selectors/ui', () => {
       });
     });
   });
+
+  describe('getAutocompleteItems', () => {
+    it('should return an array of strings from the given sources', () => {
+      const result = selectors.getAutocompleteItems('pages.standard.title')(mockState);
+
+      expect(result).toBe('Welcome');
+    });
+  });
 });

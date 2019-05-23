@@ -53,8 +53,16 @@ const FormFieldBuilder = ({ field, prefix }) => {
       break;
 
     case k.STRING:
-      component = 'input';
-      type = 'text';
+      if (field.autocompleteSource) {
+        // TODO: set component to AutocompleteInput
+      } else {
+        component = 'input';
+        type = 'text';
+      }
+      break;
+
+    case k.TAGS:
+      component = C.Tags;
       break;
 
     case k.TEXT:
@@ -69,17 +77,19 @@ const FormFieldBuilder = ({ field, prefix }) => {
 
   return (
     /* eslint-disable react/jsx-one-expression-per-line */
-    <label className='form__element'>
-      <span className='form__label'>{field.label}:</span>
+    <div className='form__element'>
+      <label className='form__label' htmlFor={field.name}>{field.label}:</label>
       <Field
         className={`form__field ${fieldClassName}`}
         component={component}
+        id={field.name}
         name={`${prefix || ''}${field.name}`}
         options={options}
         placeholder={field.placeholder}
         type={type}
+        {...field}
       />
-    </label>
+    </div>
   );
 };
 

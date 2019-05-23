@@ -19,6 +19,7 @@ export const DATE = 'date';
 export const IMAGE = 'image';
 export const MARKDOWN = 'markdown';
 export const STRING = 'string';
+export const TAGS = 'tags';
 export const TEXT = 'text';
 
 /* POPUP TYPES */

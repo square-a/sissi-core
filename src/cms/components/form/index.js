@@ -6,3 +6,4 @@ export { default as ImagePicker } from './ImagePicker';
 export { default as ImageField } from './ImageField';
 export { default as MarkdownEditor } from './MarkdownEditor';
 export { default as Select } from './Select';
+export { default as Tags } from './Tags';
