@@ -1,3 +1,4 @@
+export { default as AutocompleteInput } from './AutocompleteInput';
 export { default as FieldList } from './FieldList';
 export { default as FieldListItem } from './FieldListItem';
 export { default as Form } from './Form';

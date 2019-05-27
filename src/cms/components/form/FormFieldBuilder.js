@@ -54,7 +54,7 @@ const FormFieldBuilder = ({ field, prefix }) => {
 
     case k.STRING:
       if (field.autocompleteSource) {
-        // TODO: set component to AutocompleteInput
+        component = C.AutocompleteInput;
       } else {
         component = 'input';
         type = 'text';
