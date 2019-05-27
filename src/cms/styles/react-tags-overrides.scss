@@ -1,0 +1,43 @@
+.react-tags {
+  background-color: $color-field-background;
+  border: 1px solid $color-main-light;
+  border-radius: $border-radius;
+
+  &.is-focused {
+    border-color: $color-main-dark;
+  }
+
+  &::placeholder {
+      opacity: 1;
+      color: $color-field-placeholder;
+    }
+}
+
+.react-tags__selected-tag {
+  border-radius: $border-radius;
+  background-color: $color-main-light;
+  border-color: $color-main-dark;
+  color: $color-main-dark;
+  cursor: pointer;
+  transition: color .1s, background-color .1s;
+
+  &::after {
+    color: $color-main-dark;
+    font-size: $font-size-normal;
+    line-height: 1;
+  }
+
+  &:hover {
+    color: $color-main-light;
+    background-color: $color-main-dark;
+    border-color: $color-main-light;
+
+    &::after {
+      color: $color-main-light;
+    }
+  }
+}
+
+.react-tags__suggestions {
+  z-index: $z-index-autocomplete;
+}
