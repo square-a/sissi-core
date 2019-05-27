@@ -26,6 +26,7 @@ $gap-tiny: 6px;
 
 $element-height: 40px;
 $nav-item-height: 60px;
+$list-item-height: 24px;
 
 $button-width: 160px;
 $button-height: $element-height;
@@ -47,6 +48,7 @@ $font-size-button: 15px; // only used with text-transform: uppercase
 $z-index-alerts: 6;
 $z-index-modal: 5;
 $z-index-actionbar: 4;
+$z-index-autocomplete: 2;
 
 /* ICONS */
 

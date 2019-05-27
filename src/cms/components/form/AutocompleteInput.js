@@ -16,12 +16,19 @@ const AutocompleteInput = ({
 }) => (
   <Autocomplete
     getItemValue={item => item}
+    inputProps={{ className: 'form__field' }}
     items={autocompleteItems}
     renderItem={(item, isHighlighted) => (
-      <div key={item}>{item}</div>
+      <div
+        key={item}
+        className={`form__autocomplete-item${isHighlighted ? ' form__autocomplete-item--highlight' : ''}`}
+      >
+        {item}
+      </div>
     )}
     shouldItemRender={(item, value) => item.toLowerCase().indexOf(value.toLowerCase()) !== -1}
     value={input.value}
+    wrapperProps={{ className: 'form__autocomplete' }}
     onChange={(e, value) => input.onChange(value)}
     onSelect={(v, item) => input.onChange(item)}
   />

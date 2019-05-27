@@ -96,6 +96,23 @@
   }
 }
 
+.form__autocomplete {
+  z-index: $z-index-autocomplete;
+}
+
+.form__autocomplete-item {
+  height: $list-item-height;
+  padding-left: $gap-tiny;
+
+  background-color: $color-white;
+  font-size: $font-size-normal;
+  line-height: 1.5;
+
+  &--highlight {
+    background-color: $color-main-light;
+  }
+}
+
 .form__list-item {
   margin-bottom: $gap-normal;
   padding: $gap-normal;
