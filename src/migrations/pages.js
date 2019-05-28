@@ -6,6 +6,7 @@ module.exports = {
   _createPage: (_type = TYPE_STANDARD) => ({
     _id: getContentId(),
     _items: [],
+    _path: '',
     _type,
   }),
 
