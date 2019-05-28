@@ -75,7 +75,15 @@ describe('selectors/navigation', () => {
           expect(result).toHaveProperty('title', 'This is awesome');
         });
 
-        it('should use the label if there is no title in content', () => {
+        it('should use the name from content if there is no title', () => {
+          mockState.content.sections['345def'].title = undefined;
+          mockState.content.sections['345def'].name = 'Pippi';
+          const result = selectors.getPropsForNavItem('345def', 'sections')(mockState);
+
+          expect(result).toHaveProperty('title', 'Pippi');
+        });
+
+        it('should use the label if there is no title or name in content', () => {
           mockState.content.sections['345def'].title = undefined;
           const result = selectors.getPropsForNavItem('345def', 'sections')(mockState);
 
