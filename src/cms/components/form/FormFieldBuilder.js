@@ -78,8 +78,9 @@ const FormFieldBuilder = ({ field, prefix }) => {
   return (
     /* eslint-disable react/jsx-one-expression-per-line */
     <div className='form__element'>
-      <label className='form__label' htmlFor={field.name}>{field.label}:</label>
+      <label className='form__label' htmlFor={`${prefix || ''}${field.name}`}>{field.label}:</label>
       <Field
+        {...field}
         className={`form__field ${fieldClassName}`}
         component={component}
         id={field.name}
@@ -87,7 +88,6 @@ const FormFieldBuilder = ({ field, prefix }) => {
         options={options}
         placeholder={field.placeholder}
         type={type}
-        {...field}
       />
     </div>
   );
