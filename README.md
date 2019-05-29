@@ -59,7 +59,7 @@ And that’s all you need to know! Let’s get started, shall we?
 You're just two CLI commands away from starting your sissi project – this is so exciting!
 
 ### Installation
-First you need to globally install sissi:
+First you need to globally install sissi-cli:
 
 `npm install -g sissi-cli`
 
@@ -193,7 +193,7 @@ Note that the last field with the `list` type is actually a group of fields. The
 | type | string | | yes | supported: `string`, `text`, `markdown`, `image`, `date`, `choice`, `tags`, `list`
 | placeholder | string | | | supported for types: `string`, `text`, `markdown` |
 | maxLength | number | | | supported for types: `string`, `text` |
-| autocompleteSource | string | | supported for types: `string`, `tags`; format: `'contentType.itemType.fieldName'`, e.g. `'sections.photos.title'` |
+| autocompleteSource | string | | | supported for types: `string`, `tags`; format: `'[contentType].[itemType].[fieldName]'`, e.g. `'sections.photos.title'` |
 | options | object[] | | for type `choice` | option format: `{ key: string, label: string }` |
 | itemLabel | string | | for type `list` | description for each item in the list |
 | fields | string[] | | for type `list` | the fields for each item |
@@ -254,7 +254,7 @@ For websites with more than one page I strongly recommend to add a page with typ
 | allowedItems | string[] | `['standard']` | | has to correspond with the defined [sections](link) |
 | isProtected | boolean | `false` | | protected pages cannot be added or deleted in the CMS |
 
-Note: I will generate a path for each page. If you add a `path` field I will use its content or otherwise create the path from the `title` or `name` field. If none of these exist the path will be the randomly created page id. Also, since I need an entry point for the website, I will force the path for the index page (i.e. the top page in the CMS – which can easily be changed) to be an empty string.
+Note: I will generate a path for each page. If you add a `path` field I will use its content or otherwise create the path from the `title` or `name` field (in this order). If none of these exist the path will be the generated page id. Also, since I need an entry point for the website, I will force the path for the index page (i.e. the top page in the CMS – which can easily be changed) to be an empty string.
 
 #### sections
 `sections` work pretty much like pages and are also made up of the `fields` you defined earlier. Again, I urge you to create a `standard` section type. Here’s how this might look like:
@@ -275,7 +275,8 @@ Note: I will generate a path for each page. If you add a `path` field I will use
 | - | - | - | - | - |
 | label | string | | yes | |
 | fields | string[] | | yes | has to correspond with the defined [fields](link) |
-Note: Every section with either a `path`, `title` or `name` field can be used as a sub-route! Learn more under [EntryComponent] and [Working With Routes].
+
+Note: Every section with either a `path`, `title` or `name` field can be used as a sub-route! Learn more under [Entry Component] and [Working With Routes].
 
 ### 3. content.json
 The `content.json` holds – surprise! – all the contents of your website. I will use it to:
@@ -292,15 +293,22 @@ This all happens automatically so you don’t need to concern yourself with the 
 Just note that **your project will not run without this file** so if you delete it you need to start or visit the CMS to create a new one.
 
 ### 4. Entry Component
-I will connect your `content.json` to your React app via the `render()` function in your `index.js`. This function will map through your pages and sections and return the entry component enhanced with content props for each page and eligible section. It's all set up for you – so no worries!
+I will handle all routing for you and make sure your content is divided into nice and usable chunks – all you have to do is pass me an entry component and the content from your `content.json` into the `render()` function in your `index.js` like this:
 
-With the `sissi new` command I already set up a `Page.js` as an entry component for you – this is how I usually roll and you can just go from there if you like.
+```
+import { render } from 'sissi-core';
 
-Feel free to put things like header and footer in the `Page` component. This might seem counterintuitive at first because it means your header and footer will be rendered on every single page and not just once in your `App` component (which you might usually prefer). But remember, we will turn all this into a static site so the outcome is exactly the same!
+import content from '../content.json';
+import Page from './components/Page';
 
-However, if you want to use an `App` (or any other) component as entry point you’re free to do so. Just make sure to pass it to the `render()` function in the `index.js` file.
+render(Page, content);
 
-Your entry component will receive the following props:
+export default Page;
+```
+
+When you use the `sissi new` command this is already set up for you – including a nice little `Page.js` as your entry component. Feel free to use any other component if you like but make sure to both **pass it to the `render()` function** and **export it as default**.
+
+For each route your entry component will receive the following props:
 
 | Key | Type | Notes |
 | - | - | - |
@@ -308,9 +316,10 @@ Your entry component will receive the following props:
 | global | object | the global content |
 | page | object | the current page |
 | pages | object[] | all pages |
-| path | string | the path of the current page |
+| path | string | the path of the current page or section (e.g. /:pagePath/:sectionPath) |
 | sections | object[] | the sections of the current page |
 | section | object | the current section (for sections only!) |
+
 Note: If (and only if!) you use sections as sub-routes and link to them in your app you need to make sure your EntryComponent is ready to handle it – if you receive a `section` object you can be sure to be on a sub-route and render the content accordingly.
 
 ## Working With Routes
@@ -341,7 +350,7 @@ With `SissiLink` you can link to your pages using their auto-generated `_path` p
 ## Server Setup
 Here’s where I need to take a step back – I’m still learning about setting up a server on my own, so I can’t do this for you yet. But I can point you in the right direction with a couple of hints!
 
-When you’re ready to make your project public you need a [Node.js](https://nodejs.org/en/) server where you install `sissi` as a global dependency (`npm i -g sissi`, remember?).
+When you’re ready to make your project public you need a [Node.js](https://nodejs.org/en/) server where you install `sissi-cli` as a global dependency (`npm i -g sissi-cli`, remember?).
 
 Then run `sissi start` to prepare both your sites. I say *both*, because you’ll have:
 
@@ -374,9 +383,9 @@ I am working on writing full contribution guidelines and hope you'll check back 
 
 To get you started here are some useful commands:
 
-`npm run dev:cms` starts the CMS in development mode (surprise!),
-`npm run lint` makes sure you follow my code guidelines and
-`npm run test` runs all the beautiful tests.
+- `npm run dev:cms` starts the CMS in development mode (surprise!),
+- `npm run lint` makes sure you follow my code guidelines and
+- `npm run test` runs all the beautiful tests.
 
 ## My folks
 
