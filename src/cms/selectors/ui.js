@@ -2,6 +2,8 @@ import { createSelector } from 'reselect';
 import _flatten from 'lodash.flatten';
 
 import { LOADING } from '%/constants/keywords';
+import { ROUTE_PAGE } from '%/router';
+import { getLocation } from '%/selectors/location';
 import * as s from '%/reducers/selectors';
 import * as tr from '%/translations';
 
@@ -44,5 +46,19 @@ export const getAutocompleteItems = source => createSelector(
       }, []);
 
     return Array.from(new Set(autocompleteItems));
+  }
+);
+
+export const getIsIndexPathField = fieldName => createSelector(
+  [
+    getLocation,
+    s.getAllPageIds,
+  ],
+  ({ type, payload }, pageIds) => {
+    if (fieldName === 'path' && type === ROUTE_PAGE && pageIds[0] === payload.pageId) {
+      return true;
+    }
+
+    return false;
   }
 );

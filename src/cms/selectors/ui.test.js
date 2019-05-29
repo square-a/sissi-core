@@ -58,4 +58,22 @@ describe('selectors/ui', () => {
       expect(result).toEqual(['Welcome']);
     });
   });
+
+  describe('getIsIndexPathField', () => {
+    it('should return true for the path field on the current first page', () => {
+      mockState.location = {
+        type: 'routes/PAGE',
+        payload: { pageId: 'abc123' },
+      };
+      const result = selectors.getIsIndexPathField('path')(mockState);
+
+      expect(result).toBe(true);
+    });
+
+    it('should return false for all other fields', () => {
+      const result = selectors.getIsIndexPathField('name')(mockState);
+
+      expect(result).toBe(false);
+    });
+  });
 });

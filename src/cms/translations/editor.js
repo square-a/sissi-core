@@ -2,6 +2,7 @@
 export const IMAGE_SELECT = 'translations/editor/selectImage';
 export const IMAGE_PASTE_IN_EDITOR = 'translations/editor/pasteImage';
 export const IMAGE_UPLOAD = 'translations/editor/uploadImage';
+export const INDEX_HINT = 'translations/editor/indexHint';
 export const PAGE = 'translations/editor/page';
 export const PAGE_NEW = 'translations/editor/newPage';
 export const SECTION = 'translations/editor/section';
@@ -21,6 +22,10 @@ export default {
   [IMAGE_UPLOAD]: [
     "Upload new image",
     "Neues Bild hochladen",
+  ],
+  [INDEX_HINT]: [
+    "The path for the index page can not be edited",
+    "Der Pfad für die Startseite kann nicht geändert werden",
   ],
   [PAGE]: [
     "Page",

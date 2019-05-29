@@ -1,20 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Translate } from 'react-localize-redux';
 import {
   Field,
   FieldArray,
 } from 'redux-form';
 
+import { INDEX_HINT } from '%/translations/editor';
 import * as k from '%/constants/keywords';
 import * as C from '%/components';
 import * as selectors from '%/selectors';
 
 const mapStateToProps = (state, { fieldName }) => ({
   field: selectors.getFieldWithName(fieldName)(state),
+  isIndexPathField: selectors.getIsIndexPathField(fieldName)(state),
 });
 
-const FormFieldBuilder = ({ field, prefix }) => {
+const FormFieldBuilder = ({
+  field,
+  isIndexPathField,
+  prefix,
+}) => {
   let component;
   let type = '';
   let options = [];
@@ -83,18 +90,21 @@ const FormFieldBuilder = ({ field, prefix }) => {
         {...field}
         className={`form__field ${fieldClassName}`}
         component={component}
+        disabled={isIndexPathField}
         id={field.name}
         name={`${prefix || ''}${field.name}`}
         options={options}
-        placeholder={field.placeholder}
+        placeholder={isIndexPathField ? '' : field.placeholder}
         type={type}
       />
+      {isIndexPathField && <p className='form__hint'><Translate id={INDEX_HINT} /></p>}
     </div>
   );
 };
 
 FormFieldBuilder.propTypes = {
   field: PropTypes.object,
+  isIndexPathField: PropTypes.bool,
   prefix: PropTypes.string,
 };
 

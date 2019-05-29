@@ -50,6 +50,11 @@
     opacity: 1;
     color: $color-field-placeholder;
   }
+
+  &[disabled] {
+    border-color: $color-grey;
+    background-color: $color-light-grey;
+  }
 }
 
 .form__field--textarea {
@@ -142,4 +147,11 @@
       margin-right: $gap-tiny;
     }
   }
+}
+
+.form__hint {
+  margin: 0;
+  padding-left: $gap-tiny;
+  font-size: $font-size-hint;
+  color: $color-grey;
 }
