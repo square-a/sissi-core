@@ -190,15 +190,15 @@ Note that the last field with the `list` type is actually a group of fields. The
 | Key | Type | Default | Required | Notes |
 | - | - | - | - | - |
 | label | string | | yes | |
-| type | string | | yes | supported: `string`, `text`, `markdown`, `image`, `date`, `choice`, `list`
+| type | string | | yes | supported: `string`, `text`, `markdown`, `image`, `date`, `choice`, `tags`, `list`
 | placeholder | string | | | supported for types: `string`, `text`, `markdown` |
+| maxLength | number | | | supported for types: `string`, `text` |
+| autocompleteSource | string | | supported for types: `string`, `tags`; format: `'contentType.itemType.fieldName'`, e.g. `'sections.photos.title'` |
 | options | object[] | | for type `choice` | option format: `{ key: string, label: string }` |
 | itemLabel | string | | for type `list` | description for each item in the list |
 | fields | string[] | | for type `list` | the fields for each item |
 | maxItems | number | | for type `list` | |
 | minItems | number | | for type `list` | ||
-
-One important limitation at this point is that you **cannot use fields of type `markdown` in lists**. I know this is something I need to learn, though, so if you want to help me – please check out [Contributions]!
 
 #### global
 `global` is the ideal place to store some general website data – such as a company name, logo, background image, or meta title. You simply define this by adding the desired `fields`. The number of pages for your project are also defined here. Sometimes it’s as simple as that:
@@ -248,13 +248,13 @@ For websites with more than one page I strongly recommend to add a page with typ
 | Key | Type | Default | Required | Notes |
 | - | - | - | - | - |
 | label | string | | yes | |
-| fields | string[] | | yes | has to include a `path` field |
+| fields | string[] | | yes | |
 | maxItems | number | | yes | |
 | minItems | number | | yes | |
 | allowedItems | string[] | `['standard']` | | has to correspond with the defined [sections](link) |
 | isProtected | boolean | `false` | | protected pages cannot be added or deleted in the CMS |
 
-Important note: **Each page needs to have a `path` field!** I use these paths to create and link the different pages of your website. Also, make sure the `path` for your landing page is an **empty string** – otherwise nothing will be displayed on *your-website.org* and I won't be able to turn it static.
+Note: I will generate a path for each page. If you add a `path` field I will use its content or otherwise create the path from the `title` or `name` field. If none of these exist the path will be the randomly created page id. Also, since I need an entry point for the website, I will force the path for the index page (i.e. the top page in the CMS – which can easily be changed) to be an empty string.
 
 #### sections
 `sections` work pretty much like pages and are also made up of the `fields` you defined earlier. Again, I urge you to create a `standard` section type. Here’s how this might look like:
@@ -275,6 +275,7 @@ Important note: **Each page needs to have a `path` field!** I use these paths to
 | - | - | - | - | - |
 | label | string | | yes | |
 | fields | string[] | | yes | has to correspond with the defined [fields](link) |
+Note: Every section with either a `path`, `title` or `name` field can be used as a sub-route! Learn more under [EntryComponent] and [Working With Routes].
 
 ### 3. content.json
 The `content.json` holds – surprise! – all the contents of your website. I will use it to:
@@ -291,9 +292,9 @@ This all happens automatically so you don’t need to concern yourself with the 
 Just note that **your project will not run without this file** so if you delete it you need to start or visit the CMS to create a new one.
 
 ### 4. Entry Component
-I will connect your `content.json` to your React app via the `render()` function in your `index.js`. This function will map through your pages and return the entry component enhanced with content props for each page. It's all set up for you – so no worries!
+I will connect your `content.json` to your React app via the `render()` function in your `index.js`. This function will map through your pages and sections and return the entry component enhanced with content props for each page and eligible section. It's all set up for you – so no worries!
 
-I already set up a `Page.js` for you – this is how I usually roll and you can just go from there if you like.
+With the `sissi new` command I already set up a `Page.js` as an entry component for you – this is how I usually roll and you can just go from there if you like.
 
 Feel free to put things like header and footer in the `Page` component. This might seem counterintuitive at first because it means your header and footer will be rendered on every single page and not just once in your `App` component (which you might usually prefer). But remember, we will turn all this into a static site so the outcome is exactly the same!
 
@@ -309,6 +310,8 @@ Your entry component will receive the following props:
 | pages | object[] | all pages |
 | path | string | the path of the current page |
 | sections | object[] | the sections of the current page |
+| section | object | the current section (for sections only!) |
+Note: If (and only if!) you use sections as sub-routes and link to them in your app you need to make sure your EntryComponent is ready to handle it – if you receive a `section` object you can be sure to be on a sub-route and render the content accordingly.
 
 ## Working With Routes
 In order to link your internal routes and make sure that I include all your routes in the static version of your site you have to use the `SissiLink` component.
@@ -333,6 +336,8 @@ This will render a link just like this:
 
 Note the `data-type="sissi-internal"` part? That’s how the snapshot generator will know which sites to include in the static version of your app, so this is essential!
 
+With `SissiLink` you can link to your pages using their auto-generated `_path` prop – all pages have it. Sections can (but don't have to!) be used as sub-routes. When a section has a `path`, `title` or `name` field it, too, will receive a `_path` prop and can be linked to.
+
 ## Server Setup
 Here’s where I need to take a step back – I’m still learning about setting up a server on my own, so I can’t do this for you yet. But I can point you in the right direction with a couple of hints!
 
@@ -345,7 +350,7 @@ Then run `sissi start` to prepare both your sites. I say *both*, because you’l
 
 This part is my job. Your job is to point one domain to the folder and another to the port so the static site and CMS can both be visited by the public.
 
-I recommend configuring [Nginx](https://www.nginx.com/) as a [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy), so that it might serve the static website on *your-website.org* and the CMS on *admin.your-website.org*. [Here’s](https://www.linode.com/docs/web-servers/nginx/use-nginx-reverse-proxy/) a good tutorial to get you started.
+I recommend configuring [Nginx](https://www.nginx.com/) as a [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy), so that it might serve the static website on *your-website.org* and the CMS on *admin.your-website.org*. Here’s a [good tutorial](https://www.linode.com/docs/web-servers/nginx/use-nginx-reverse-proxy/) to get you started.
 
 If you plan on serving multiple websites from the same server you might want to configure the CMS port instead of using the defaults. You can do that by creating a `.sissi` file (I will do that for you if you started your project with `sissi new`). This file might look like this:
 
@@ -366,6 +371,12 @@ Hey, again. I’m so glad you’ve made it here! Because I could really use your
 I’m still a child and have yet to grow and [much to learn][issues], so please be patient. If you could kindly [point out how I can improve][issues] or if you even want to teach me something new I’d be forever grateful!
 
 I am working on writing full contribution guidelines and hope you'll check back soon for more. Until then – don't be shy! All feedback and ideas are appreciated and I am convinced that everyone can teach me something, be it a code newbie or pro.
+
+To get you started here are some useful commands:
+
+`npm run dev:cms` starts the CMS in development mode (surprise!),
+`npm run lint` makes sure you follow my code guidelines and
+`npm run test` runs all the beautiful tests.
 
 ## My folks
 
