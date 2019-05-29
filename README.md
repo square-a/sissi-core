@@ -380,13 +380,13 @@ To get you started here are some useful commands:
 
 ## My folks
 
-<img src='/src/templates/public/images/a-square.svg'  width='160px' />
+<img src='https://github.com/square-a/sissi-cli/blob/master/src/templates/public/images/a-square.svg'  width='160px' />
 
 So, now that we’ve met and I’ve told you so much about me please let me introduce you to my lovely creators. Head over to [A square] to say hi and see what else they do when they’re not busy tending to me!
 
 See you around.
 
-<img src='/src/templates/public/images/sissi.svg'  width='40px' /> Yours, sissi
+<img src='sissi.png'  width='40px' /> Yours, sissi
 
 [A square]: https://a-square.eu
 [issues]: https://github.com/square-a/sissi/issues
