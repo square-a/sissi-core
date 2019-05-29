@@ -39,7 +39,7 @@ export const getPropsForFieldList = listName => createSelector(
   ],
   (fieldList, { item: listParent }) => {
     if (listName) {
-      const listLength = listParent.content[listName].length;
+      const listLength = listParent.content[listName] ? listParent.content[listName].length : 0;
       return {
         canAdd: listLength < fieldList.maxItems,
         canDelete: listLength > fieldList.minItems,
