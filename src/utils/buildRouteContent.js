@@ -4,14 +4,14 @@ module.exports = (content, { params, url }) => {
   const { pageSlug = '', sectionSlug } = params;
   const page = Object
     .values(content.pages)
-    .find(p => p.path === pageSlug);
+    .find(p => p._path === pageSlug);
 
   let section;
 
   if (!isSinglePage && sectionSlug) {
     section = page._items
       .map(sId => content.sections[sId])
-      .find(s => s.path === sectionSlug);
+      .find(s => s._path === sectionSlug);
   }
 
   return {

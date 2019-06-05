@@ -50,6 +50,11 @@
     opacity: 1;
     color: $color-field-placeholder;
   }
+
+  &[disabled] {
+    border-color: $color-grey;
+    background-color: $color-light-grey;
+  }
 }
 
 .form__field--textarea {
@@ -96,6 +101,24 @@
   }
 }
 
+.form__autocomplete {
+  z-index: $z-index-autocomplete;
+}
+
+.form__autocomplete-item {
+  height: $list-item-height;
+  padding-left: $gap-tiny;
+
+  background-color: $color-white;
+  font-size: $font-size-normal;
+  line-height: 1.5;
+  cursor: pointer;
+
+  &--highlight {
+    background-color: $color-main-light;
+  }
+}
+
 .form__list-item {
   margin-bottom: $gap-normal;
   padding: $gap-normal;
@@ -124,4 +147,11 @@
       margin-right: $gap-tiny;
     }
   }
+}
+
+.form__hint {
+  margin: 0;
+  padding-left: $gap-tiny;
+  font-size: $font-size-hint;
+  color: $color-grey;
 }

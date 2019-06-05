@@ -35,7 +35,7 @@ const SissiRoutes = ({ content, EntryComponent }) => {
 
 SissiRoutes.propTypes = {
   content: PropTypes.object.isRequired,
-  EntryComponent: PropTypes.node.isRequired,
+  EntryComponent: PropTypes.func.isRequired,
 };
 
 module.exports = SissiRoutes;

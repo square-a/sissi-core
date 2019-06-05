@@ -50,7 +50,8 @@ module.exports = class Content {
     ));
 
     missingItemFields.forEach(fieldName => {
-      if (this.structure.fields[fieldName].type === 'list') {
+      const fieldType = this.structure.fields[fieldName].type;
+      if (fieldType === 'list' || fieldType === 'tags') {
         itemContent[fieldName] = [];
       } else {
         itemContent[fieldName] = '';

@@ -5,6 +5,7 @@ import * as t from '%/actions/types';
 import * as constants from '%/constants/keywords';
 import * as selectors from '%/selectors';
 import { transformToHtml } from '%/helpers/markdownHtmlConverter';
+import generatePaths from '%/helpers/generatePaths';
 
 export default ({ getState }, selectFormValues = getFormValues) => next => action => {
   const { type, payload } = action;
@@ -31,9 +32,10 @@ export default ({ getState }, selectFormValues = getFormValues) => next => actio
 
     const newContent = _merge({}, selectors.getContent(state), contentUpdate);
     const transformedData = transformToHtml(newContent, selectors.getFields(state));
+    const contentWithPaths = generatePaths(transformedData);
 
     // eslint-disable-next-line no-param-reassign
-    action.payload.requestData = transformedData;
+    action.payload.requestData = contentWithPaths;
   }
   next(action);
 };

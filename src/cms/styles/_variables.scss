@@ -8,13 +8,13 @@ $color-background: rgb(253, 253, 242);
 $color-background-transparent: rgba(253, 253, 242, 0.9);
 
 $color-white: rgb(255, 255, 255);
-$color-grey: rgb(190, 190, 190);
+$color-grey: rgb(160, 160, 160);
+$color-light-grey: rgb(224, 224, 224);
 
 $color-error: rgb(158, 14, 19);
 $color-success: $color-main-medium;
 
 $color-field-background: $color-white;
-$color-field-border: $color-grey;
 $color-field-placeholder: $color-grey;
 
 /* MEASURES */
@@ -26,6 +26,7 @@ $gap-tiny: 6px;
 
 $element-height: 40px;
 $nav-item-height: 60px;
+$list-item-height: 24px;
 
 $button-width: 160px;
 $button-height: $element-height;
@@ -41,12 +42,14 @@ $border-radius: 12px;
 $font-size-title: 32px;
 $font-size-normal: 16px;
 $font-size-button: 15px; // only used with text-transform: uppercase
+$font-size-hint: 14px;
 
 /* Z-INDEX */
 
 $z-index-alerts: 6;
 $z-index-modal: 5;
 $z-index-actionbar: 4;
+$z-index-autocomplete: 2;
 
 /* ICONS */
 
