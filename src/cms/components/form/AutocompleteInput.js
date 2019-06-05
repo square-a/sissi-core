@@ -7,7 +7,7 @@ import Autocomplete from 'react-autocomplete';
 import * as selectors from '%/selectors';
 
 const mapStateToProps = (state, { autocompleteSource }) => ({
-  autocompleteItems: autocompleteSource ? selectors.getAutocompleteItems(autocompleteSource)(state) : [],
+  autocompleteItems: selectors.getAutocompleteItems(autocompleteSource)(state),
 });
 
 const AutocompleteInput = ({
@@ -32,8 +32,8 @@ const AutocompleteInput = ({
     shouldItemRender={(item, value) => item.toLowerCase().indexOf(value.toLowerCase()) !== -1}
     value={input.value}
     wrapperProps={{ className: 'form__autocomplete' }}
-    onChange={(e, value) => input.onChange(value)}
-    onSelect={(v, item) => input.onChange(item)}
+    onChange={(_, value) => input.onChange(value)}
+    onSelect={(_, item) => input.onChange(item)}
     {...input}
   />
 );

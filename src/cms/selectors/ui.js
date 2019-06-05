@@ -54,11 +54,7 @@ export const getIsIndexPathField = fieldName => createSelector(
     getLocation,
     s.getAllPageIds,
   ],
-  ({ type, payload }, pageIds) => {
-    if (fieldName === 'path' && type === ROUTE_PAGE && pageIds[0] === payload.pageId) {
-      return true;
-    }
-
-    return false;
-  }
+  ({ type, payload }, pageIds) => (
+    fieldName === 'path' && type === ROUTE_PAGE && pageIds[0] === payload.pageId
+  )
 );

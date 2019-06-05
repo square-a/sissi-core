@@ -17,12 +17,6 @@ describe('helpers/formatTags', () => {
 
       expect(value).toEqual(expectedOutput);
     });
-
-    it('should return an empty array if the input array is empty', () => {
-      const value = stringsToTags([]);
-
-      expect(value).toEqual([]);
-    });
   });
 
   describe('tagsToStrings', () => {
@@ -37,12 +31,6 @@ describe('helpers/formatTags', () => {
       const value = tagsToStrings(tags);
 
       expect(value).toEqual(expectedOutput);
-    });
-
-    it('should return an empty array if the input array is empty', () => {
-      const value = stringsToTags([]);
-
-      expect(value).toEqual([]);
     });
   });
 });

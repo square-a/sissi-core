@@ -17,7 +17,8 @@ const Tags = ({
   autocompleteItems,
   input = {},
 }) => {
-  const [tags, setTags] = useState(stringsToTags(input.value));
+  const value = typeof input.value === 'string' ? [] : input.value;
+  const [tags, setTags] = useState(stringsToTags(value));
 
   const addTag = tag => {
     const updatedTags = [

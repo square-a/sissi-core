@@ -20,7 +20,7 @@ const mapStateToProps = (state, { fieldName }) => ({
 const FormFieldBuilder = ({
   field,
   isIndexPathField,
-  prefix,
+  prefix = '',
 }) => {
   let component;
   let type = '';
@@ -85,14 +85,14 @@ const FormFieldBuilder = ({
   return (
     /* eslint-disable react/jsx-one-expression-per-line */
     <div className='form__element'>
-      <label className='form__label' htmlFor={`${prefix || ''}${field.name}`}>{field.label}:</label>
+      <label className='form__label' htmlFor={`${prefix}${field.name}`}>{field.label}:</label>
       <Field
         {...field}
         className={`form__field ${fieldClassName}`}
         component={component}
         disabled={isIndexPathField}
         id={field.name}
-        name={`${prefix || ''}${field.name}`}
+        name={`${prefix}${field.name}`}
         options={options}
         placeholder={isIndexPathField ? '' : field.placeholder}
         type={type}
