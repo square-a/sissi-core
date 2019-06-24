@@ -1,6 +1,8 @@
 import _cloneDeep from 'lodash.clonedeep';
 import slugify from 'slugify';
 
+const slugOpts = { remove: /[*+~.()'"!:@]/g };
+
 export default input => {
   const content = _cloneDeep(input);
   const paths = {
@@ -10,7 +12,7 @@ export default input => {
 
   const findPath = (item, type, fallback) => {
     const pathName = item.path || item.title || item.name || fallback;
-    let _path = pathName ? slugify(pathName).toLowerCase() : fallback;
+    let _path = pathName ? slugify(pathName, slugOpts).toLowerCase() : fallback;
 
     if (_path !== undefined && paths[type].has(_path)) {
       _path = `${_path}_${item._id}`;
