@@ -35,8 +35,26 @@ module.exports = {
     publicPath: '/',
     historyApiFallback: true,
     port: config.devPort,
-    stats: isSissiCms ? 'normal' : 'errors-only',
-    noInfo: !isSissiCms,
+    stats: isSissiCms
+      ? 'normal'
+      : {
+        entrypoints: false,
+        chunkGroups: false,
+        modules: false,
+        chunks: false,
+        chunkModules: false,
+        chunkOrigins: false,
+        depth: false,
+        env: false,
+        reasons: false,
+        usedExports: false,
+        providedExports: false,
+        optimizationBailout: false,
+        errorDetails: false,
+        publicPath: false,
+        exclude: false,
+        maxModules: 0,
+      },
   },
   mode: isProduction ? 'production' : 'development',
   module: {
