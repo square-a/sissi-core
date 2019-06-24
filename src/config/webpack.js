@@ -80,7 +80,9 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               ident: 'postcss',
-              plugins: () => [postcssPresetEnv()],
+              plugins: () => [postcssPresetEnv({
+                autoprefixer: { grid: true },
+              })],
             },
           },
           'sass-loader',
