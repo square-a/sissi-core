@@ -190,7 +190,7 @@ Note that the last field with the `list` type is actually a group of fields. The
 | Key | Type | Default | Required | Notes |
 | - | - | - | - | - |
 | label | string | | yes | |
-| type | string | | yes | supported: `string`, `text`, `markdown`, `image`, `date`, `choice`, `tags`, `list`
+| type | string | | yes | supported: `string`, `text`, `markdown`, `image`, `date`, `choice`, `tags`, `boolean`, `list` |
 | placeholder | string | | | supported for types: `string`, `text`, `markdown` |
 | maxLength | number | | | supported for types: `string`, `text` |
 | autocompleteSource | string | | | supported for types: `string`, `tags`; format: `'[contentType].[itemType].[fieldName]'`, e.g. `'sections.photos.title'` |
