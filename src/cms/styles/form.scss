@@ -57,6 +57,10 @@
   }
 }
 
+.form__field--checkbox {
+  width: 10%;
+}
+
 .form__field--textarea {
   height: $field-height-textarea;
   padding: $gap-tiny $gap-half $gap-half;

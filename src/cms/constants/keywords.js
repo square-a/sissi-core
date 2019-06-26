@@ -14,6 +14,7 @@ export const STANDARD = 'standard';
 
 /* FIELD TYPES */
 export const LIST = 'list';
+export const BOOLEAN = 'boolean';
 export const CHOICE = 'choice';
 export const DATE = 'date';
 export const IMAGE = 'image';

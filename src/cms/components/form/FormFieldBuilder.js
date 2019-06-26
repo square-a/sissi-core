@@ -40,6 +40,12 @@ const FormFieldBuilder = ({
         />
       );
 
+    case k.BOOLEAN:
+      component = 'input';
+      type = 'checkbox';
+      fieldClassName = 'form__field--checkbox';
+      break;
+
     case k.CHOICE:
       component = C.Select;
       options = field.options;
