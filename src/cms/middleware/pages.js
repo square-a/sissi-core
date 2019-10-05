@@ -30,7 +30,7 @@ export default ({ dispatch, getState }) => next => action => {
     };
 
     const fields = selectors.getFieldsForPageType(_type)(getState());
-    fields.forEach(field => appendEmptyField(field, newPage));
+    fields.forEach(field => appendEmptyField(field, newPage, getState()));
 
     payload.page = newPage;
     next(action);

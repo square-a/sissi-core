@@ -1,7 +1,7 @@
 import * as k from '%/constants/keywords';
 import { getFieldWithName } from '%/selectors';
 
-const appendEmptyField = (field, parent) => {
+const appendEmptyField = (field, parent, state) => {
   /* eslint-disable no-param-reassign */
   switch (field.type) {
     case k.LIST: {
@@ -11,8 +11,8 @@ const appendEmptyField = (field, parent) => {
       for (let i = 0; i < minItems; i += 1) {
         const newListItem = {};
         fieldNames.forEach(fieldName => {
-          const nestedField = getFieldWithName(fieldName);
-          appendEmptyField(nestedField, newListItem);
+          const nestedField = getFieldWithName(fieldName)(state);
+          appendEmptyField(nestedField, newListItem, state);
         });
         list.push(newListItem);
       }

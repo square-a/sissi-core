@@ -28,7 +28,7 @@ export default ({ dispatch, getState }) => next => action => {
     };
 
     const fields = selectors.getFieldsForSectionType(_type)(getState());
-    fields.forEach(field => appendEmptyField(field, newSection));
+    fields.forEach(field => appendEmptyField(field, newSection, getState()));
 
     payload.section = newSection;
   }
