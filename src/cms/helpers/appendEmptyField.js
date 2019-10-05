@@ -1,16 +1,22 @@
 import * as k from '%/constants/keywords';
+import { getFieldWithName } from '%/selectors';
 
-export default (field, parent) => {
+const appendEmptyField = (field, parent) => {
+  /* eslint-disable no-param-reassign */
   switch (field.type) {
     case k.LIST: {
-      const { fields: itemFieldNames, minItems } = field;
-      parent[field._name] = [];
+      const { fields: fieldNames, minItems } = field;
+      const list = [];
 
       for (let i = 0; i < minItems; i += 1) {
-        const newItem = {};
-        itemFieldNames.forEach(fieldName => newItem[fieldName] = '');
-        parent[field._name].push(newItem);
+        const newListItem = {};
+        fieldNames.forEach(fieldName => {
+          const nestedField = getFieldWithName(fieldName);
+          appendEmptyField(nestedField, newListItem);
+        });
+        list.push(newListItem);
       }
+      parent[field._name] = list;
       break;
     }
 
@@ -25,4 +31,7 @@ export default (field, parent) => {
     default:
       parent[field._name] = '';
   }
+  /* eslint-enable */
 };
+
+export default appendEmptyField;
