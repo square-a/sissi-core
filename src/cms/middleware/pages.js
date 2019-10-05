@@ -3,6 +3,7 @@ import * as t from '%/actions/types';
 import * as k from '%/constants/keywords';
 import * as selectors from '%/selectors';
 import getRandomString from '%/helpers/getRandomString';
+import appendEmptyField from '%/helpers/appendEmptyField';
 
 // eslint-disable-next-line consistent-return
 export default ({ dispatch, getState }) => next => action => {
@@ -29,21 +30,7 @@ export default ({ dispatch, getState }) => next => action => {
     };
 
     const fields = selectors.getFieldsForPageType(_type)(getState());
-    fields.forEach(field => {
-      if (field.type === k.LIST) {
-        const { fields: itemFieldNames, minItems } = field;
-        newPage[field._name] = [];
-
-        for (let i = 0; i < minItems; i += 1) {
-          const newItem = {};
-          itemFieldNames.forEach(fieldName => newItem[fieldName] = '');
-          newPage[field._name].push(newItem);
-        }
-
-      } else {
-        newPage[field._name] = '';
-      }
-    });
+    fields.forEach(field => appendEmptyField(field, newPage));
 
     payload.page = newPage;
     next(action);
