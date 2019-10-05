@@ -32,7 +32,7 @@
     "jest": "^24.9.0",
     "lodash.flatten": "^4.4.0",
     "lodash.merge": "^4.6.2",
-    "marked": "^0.6.3",
+    "marked": "^0.7.0",
     "react-autocomplete": "^1.8.1",
     "react-beautiful-dnd": "^10.1.1",
     "react-localize-redux": "^3.5.3",
