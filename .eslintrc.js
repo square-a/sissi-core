@@ -2,6 +2,7 @@ const path = require('path');
 
 module.exports = {
   extends: 'zweitag',
+  plugins: ['react-hooks'],
   settings: {
     react: {
       version: '16.8',

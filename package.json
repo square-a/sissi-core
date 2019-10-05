@@ -27,6 +27,7 @@
     "eslint": "^5.16.0",
     "eslint-config-zweitag": "^1.0.4",
     "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-react-hooks": "^2.1.2",
     "inscrybmde": "^1.11.6",
     "jest": "^24.9.0",
     "lodash.flatten": "^4.4.0",
