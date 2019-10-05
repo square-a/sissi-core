@@ -11,7 +11,7 @@ describe('helpers/appendEmptyField', () => {
           type: 'string',
         },
       },
-    }, 
+    },
   };
 
   beforeEach(() => {
