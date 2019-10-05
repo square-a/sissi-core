@@ -20,6 +20,7 @@ const NavBar = ({
           {...provided.droppableProps}
         >
           {children}
+          {provided.placeholder}
         </nav>
       )}
     </Droppable>

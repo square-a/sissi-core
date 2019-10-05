@@ -34,7 +34,7 @@
     "lodash.merge": "^4.6.2",
     "marked": "^0.7.0",
     "react-autocomplete": "^1.8.1",
-    "react-beautiful-dnd": "^10.1.1",
+    "react-beautiful-dnd": "^11.0.5",
     "react-localize-redux": "^3.5.3",
     "react-redux": "^7.1.1",
     "react-tag-autocomplete": "^5.11.1",
