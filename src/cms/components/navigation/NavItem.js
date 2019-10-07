@@ -35,7 +35,6 @@ const NavItem = ({
             {title}
           </NavLink>
         </div>
-        {provided.placeholder}
       </div>
     )}
   </Draggable>
