@@ -1,8 +1,9 @@
 import * as actions from '%/actions';
 import * as t from '%/actions/types';
 import * as k from '%/constants/keywords';
-import getRandomString from '%/helpers/getRandomString';
 import * as selectors from '%/selectors';
+import getRandomString from '%/helpers/getRandomString';
+import appendEmptyField from '%/helpers/appendEmptyField';
 
 // eslint-disable-next-line consistent-return
 export default ({ dispatch, getState }) => next => action => {
@@ -27,21 +28,7 @@ export default ({ dispatch, getState }) => next => action => {
     };
 
     const fields = selectors.getFieldsForSectionType(_type)(getState());
-    fields.forEach(field => {
-      if (field.type === k.LIST) {
-        const { fields: itemFieldNames, minItems } = field;
-        newSection[field._name] = [];
-
-        for (let i = 0; i < minItems; i += 1) {
-          const newItem = {};
-          itemFieldNames.forEach(fieldName => newItem[fieldName] = '');
-          newSection[field._name].push(newItem);
-        }
-
-      } else {
-        newSection[field._name] = '';
-      }
-    });
+    fields.forEach(field => appendEmptyField(field, newSection, getState()));
 
     payload.section = newSection;
   }

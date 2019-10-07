@@ -15,7 +15,7 @@ describe('selectors/form', () => {
     it('should return the field with an added "name" parameter', () => {
       const result = selectors.getFieldWithName('title')(mockState);
 
-      expect(result).toHaveProperty('name', 'title');
+      expect(result).toHaveProperty('_name', 'title');
       expect(result).toHaveProperty('placeholder', 'Your title');
     });
   });

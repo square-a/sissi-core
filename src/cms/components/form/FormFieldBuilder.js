@@ -33,9 +33,9 @@ const FormFieldBuilder = ({
         <FieldArray
           component={C.FieldList}
           fieldNames={field.fields}
-          name={field.name}
+          name={field._name}
           props={{
-            name: field.name,
+            name: field._name,
           }}
         />
       );
@@ -91,14 +91,14 @@ const FormFieldBuilder = ({
   return (
     /* eslint-disable react/jsx-one-expression-per-line */
     <div className='form__element'>
-      <label className='form__label' htmlFor={`${prefix}${field.name}`}>{field.label}:</label>
+      <label className='form__label' htmlFor={`${prefix}${field._name}`}>{field.label}:</label>
       <Field
         {...field}
         className={`form__field ${fieldClassName}`}
         component={component}
         disabled={isIndexPathField}
-        id={field.name}
-        name={`${prefix}${field.name}`}
+        id={field._name}
+        name={`${prefix}${field._name}`}
         options={options}
         placeholder={isIndexPathField ? '' : field.placeholder}
         type={type}

@@ -7,7 +7,7 @@ export const getFieldWithName = fieldName => createSelector(
   [
     s.getFields,
   ],
-  fields => ({ ...fields[fieldName], name: fieldName })
+  fields => ({ ...fields[fieldName], _name: fieldName })
 );
 
 export const getFieldsForPageType = pageType => createSelector(
