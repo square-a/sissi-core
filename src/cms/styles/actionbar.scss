@@ -11,8 +11,11 @@
   width: $button-width + $gap-normal;
   padding: $gap-wide $gap-half;
 
+  pointer-events: none;
+
   .button {
     margin-top: $gap-half;
+    pointer-events: all;
   }
 }
 
@@ -23,6 +26,7 @@
   padding: $gap-tiny $gap-tiny 0 $gap-tiny;
 
   background-color: transparent;
+  pointer-events: all;
   cursor: pointer;
 
   &:hover {
