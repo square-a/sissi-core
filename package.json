@@ -1,6 +1,6 @@
 {
   "name": "sissi-core",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Core scripts sissi (simple static sites)",
   "license": "GPL-3.0-or-later",
   "author": "A square",
@@ -52,7 +52,7 @@
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.6",
+    "babel-loader": "^9.2.1",
     "chalk": "^2.4.2",
     "cors": "^2.8.5",
     "css-loader": "^6.11.0",
