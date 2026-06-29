@@ -1,7 +1,6 @@
-import middleware from './fieldLists';
-
 import * as t from '%/actions/types';
 import _testState from '%/reducers/_testState';
+import middleware from './fieldLists';
 
 describe('middleware/fieldLists', () => {
   let mockAction, mockNext, mockStore;

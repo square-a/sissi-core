@@ -1,7 +1,6 @@
-import middleware from './sendRequest';
-
-import * as t from '%/actions/types';
 import { ERROR } from '%/constants';
+import * as t from '%/actions/types';
+import middleware from './sendRequest';
 
 describe('middleware/sendRequest', () => {
   let mockAction, mockClient, mockDispatch, mockGet, mockNext, mockSelectors, mockStore;

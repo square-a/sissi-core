@@ -1,17 +1,46 @@
 const fs = require('fs');
 const path = require('path');
-const { promisify } = require('util');
-const { sync: mkDirPSync } = require('mkdirp');
-const { ncp } = require('ncp');
-const rimraf = require('rimraf');
 
 const config = require('@/config');
 const Crawler = require('@/utils/Crawler');
 
-global.window = {};
-
-const copyDir = promisify(ncp);
+global.window = {
+  performance: {
+    now: Date.now,
+  },
+};
+global.self = global.window;
+global.performance = global.window.performance;
 const sissiScriptTag = /<script([^>])*sissi-script([^>])*><\/script>/;
+
+const shouldCopyPath = (publicPath, sourcePath) => {
+  const relativePath = path.relative(publicPath, sourcePath);
+
+  if (!relativePath) {
+    return true;
+  }
+
+  return !relativePath.includes('_tmp') && !relativePath.includes('index.html');
+};
+
+const copyDirContents = (sourceDir, destinationDir, publicPath) => {
+  fs.readdirSync(sourceDir, { withFileTypes: true }).forEach(entry => {
+    const sourcePath = path.join(sourceDir, entry.name);
+    const destinationPath = path.join(destinationDir, entry.name);
+
+    if (!shouldCopyPath(publicPath, sourcePath)) {
+      return;
+    }
+
+    if (entry.isDirectory()) {
+      fs.mkdirSync(destinationPath, { recursive: true });
+      copyDirContents(sourcePath, destinationPath, publicPath);
+      return;
+    }
+
+    fs.copyFileSync(sourcePath, destinationPath);
+  });
+};
 
 const requireNoCache = filePath => {
   delete require.cache[require.resolve(filePath)];
@@ -33,10 +62,10 @@ module.exports = async function snapshot() {
   const Page = requireNoCache(scriptFile).default;
   const template = templateWithScript.replace(sissiScriptTag, '');
 
-  rimraf.sync(outPath);
-  fs.mkdirSync(outPath);
+  fs.rmSync(outPath, { recursive: true, force: true });
+  fs.mkdirSync(outPath, { recursive: true });
 
-  await copyDir(publicPath, outPath, { filter: /^(?!.*_tmp)(?!.*index\.html).*$/ });
+  copyDirContents(publicPath, outPath, publicPath);
   const crawler = new Crawler(Page, content, template);
   const staticPages = await crawler.crawl();
 
@@ -44,7 +73,7 @@ module.exports = async function snapshot() {
     const dirName = path.join(outPath, pathName);
     const filePath = path.join(dirName, 'index.html');
 
-    mkDirPSync(dirName);
+    fs.mkdirSync(dirName, { recursive: true });
     fs.writeFileSync(filePath, html);
   });
 };

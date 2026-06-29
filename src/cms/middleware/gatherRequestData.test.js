@@ -1,6 +1,6 @@
-import middleware from './gatherRequestData';
-import testState from '%/reducers/_testState';
 import * as t from '%/actions/types';
+import testState from '%/reducers/_testState';
+import middleware from './gatherRequestData';
 
 describe('middleware/gatherRequestData', () => {
   let mockAction,

@@ -1,10 +1,10 @@
 import _cloneDeep from 'lodash.clonedeep';
 
 import _testState from '%/reducers/_testState';
-import * as t from './types';
 import * as k from '%/constants/keywords';
-import * as actions from './creators';
 import * as routes from '%/router';
+import * as actions from './creators';
+import * as t from './types';
 
 describe('actions/content', () => {
   describe('addPage', () => {

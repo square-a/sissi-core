@@ -1,6 +1,6 @@
 import _cloneDeep from 'lodash.clonedeep';
-import generatePaths from './generatePaths';
 import _testState from '%/reducers/_testState';
+import generatePaths from './generatePaths';
 
 describe('helpers/generatePaths', () => {
   let mockContent;

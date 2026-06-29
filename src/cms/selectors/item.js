@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
 
 import * as c from '%/constants';
+import selectItem from '%/helpers/selectItem';
 import * as s from '%/reducers/selectors';
 import { getLocation } from './location';
-import selectItem from '%/helpers/selectItem';
 
 export const getCurrentItemBlueprintWithParent = createSelector(
   [

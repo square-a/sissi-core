@@ -24,37 +24,52 @@ module.exports = {
   entry: inPath,
   output: {
     filename: scriptName,
+    globalObject: 'this',
     publicPath: '/',
     path: publicPath,
-    library: config.entryComponent,
-    libraryTarget: 'umd',
+    library: {
+      name: config.entryComponent,
+      type: 'umd',
+    },
   },
-  devtool: (isSissiCms && !isProduction) ? 'source-maps' : false,
+  resolve: {
+    alias: {
+      '@': path.resolve(process.cwd(), 'src'),
+      '%': path.resolve(process.cwd(), 'src/cms'),
+    },
+    extensions: ['.js', '.jsx'],
+  },
+  devtool: (isSissiCms && !isProduction) ? 'source-map' : false,
   devServer: {
-    contentBase: publicPath,
-    publicPath: '/',
+    host: '127.0.0.1',
+    static: {
+      directory: publicPath,
+      publicPath: '/',
+    },
     historyApiFallback: true,
     port: config.devPort,
-    stats: isSissiCms
-      ? 'normal'
-      : {
-        entrypoints: false,
-        chunkGroups: false,
-        modules: false,
-        chunks: false,
-        chunkModules: false,
-        chunkOrigins: false,
-        depth: false,
-        env: false,
-        reasons: false,
-        usedExports: false,
-        providedExports: false,
-        optimizationBailout: false,
-        errorDetails: false,
-        publicPath: false,
-        exclude: false,
-        maxModules: 0,
-      },
+    devMiddleware: {
+      stats: isSissiCms
+        ? 'normal'
+        : {
+          entrypoints: false,
+          chunkGroups: false,
+          modules: false,
+          chunks: false,
+          chunkModules: false,
+          chunkOrigins: false,
+          depth: false,
+          env: false,
+          reasons: false,
+          usedExports: false,
+          providedExports: false,
+          optimizationBailout: false,
+          errorDetails: false,
+          publicPath: false,
+          exclude: false,
+          maxModules: 0,
+        },
+    },
   },
   mode: isProduction ? 'production' : 'development',
   module: {
@@ -63,8 +78,12 @@ module.exports = {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         options: {
-          plugins: ['syntax-dynamic-import'],
-          presets: ['@babel/preset-react'],
+          babelrc: false,
+          configFile: false,
+          presets: [
+            '@babel/preset-env',
+            '@babel/preset-react',
+          ],
           cacheDirectory: true,
         },
       },
@@ -74,15 +93,19 @@ module.exports = {
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
-            options: { importLoaders: 1 },
+            options: {
+              importLoaders: 1,
+              url: false,
+            },
           },
           {
             loader: 'postcss-loader',
             options: {
-              ident: 'postcss',
-              plugins: () => [postcssPresetEnv({
-                autoprefixer: { grid: true },
-              })],
+              postcssOptions: {
+                plugins: [postcssPresetEnv({
+                  autoprefixer: { grid: true },
+                })],
+              },
             },
           },
           'sass-loader',
@@ -97,7 +120,6 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({
       filename: styleName,
-      path: publicPath,
     }),
   ],
 };

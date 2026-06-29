@@ -51,7 +51,7 @@ I turn your React apps into static sites and offer a simple (yet customisable) b
 
 ### Environment
 
-I breathe **JavaScript** – I run on [Node.js servers](https://nodejs.org) only, PHP makes me sick. And my favourite frontend playground is [React](https://reactjs.org/). I might be able to join you elsewhere but I’ve never tried before so you’ll have to show me how.
+I breathe **JavaScript** – I run on [Node.js servers](https://nodejs.org) only, PHP makes me sick. Use **Node 20 LTS or newer**. And my favourite frontend playground is [React](https://reactjs.org/). I might be able to join you elsewhere but I’ve never tried before so you’ll have to show me how.
 
 And that’s all you need to know! Let’s get started, shall we?
 
@@ -59,7 +59,7 @@ And that’s all you need to know! Let’s get started, shall we?
 You're just two CLI commands away from starting your sissi project – this is so exciting!
 
 ### Installation
-First you need to globally install sissi-cli:
+First make sure you're on **Node 20 LTS or newer**, then globally install sissi-cli:
 
 `npm install -g sissi-cli`
 
@@ -350,7 +350,7 @@ With `SissiLink` you can link to your pages using their auto-generated `_path` p
 ## Server Setup
 Here’s where I need to take a step back – I’m still learning about setting up a server on my own, so I can’t do this for you yet. But I can point you in the right direction with a couple of hints!
 
-When you’re ready to make your project public you need a [Node.js](https://nodejs.org/en/) server where you install `sissi-cli` as a global dependency (`npm i -g sissi-cli`, remember?).
+When you’re ready to make your project public you need a [Node.js 20 LTS](https://nodejs.org/en/) server where you install `sissi-cli` as a global dependency (`npm i -g sissi-cli`, remember?).
 
 Then run `sissi start` to prepare both your sites. I say *both*, because you’ll have:
 

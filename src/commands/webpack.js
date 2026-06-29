@@ -21,9 +21,9 @@ module.exports = mode => new Promise((resolve, reject) => {
 
   } else if (mode === 'development') {
     const compiler = webpack(webpackConfig);
-    const webpackServer = new WebpackDevServer(compiler, devServerConfig);
+    const webpackServer = new WebpackDevServer(devServerConfig, compiler);
 
-    webpackServer.listen(devServerConfig.port, '127.0.0.1', err => {
+    webpackServer.startCallback(err => {
       if (err) {
         return reject(err);
       }

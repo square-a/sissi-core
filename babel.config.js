@@ -5,15 +5,13 @@ const options = {
       '@babel/preset-env',
       {
         targets: {
-          node: true,
+          node: '20',
         },
       },
     ],
     '@babel/preset-react',
-    ['minify', { builtIns: false }],
   ],
   plugins: [
-    '@babel/plugin-proposal-object-rest-spread',
     [
       'module-resolver',
       {

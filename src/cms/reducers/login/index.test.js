@@ -1,5 +1,5 @@
-import reducer, * as selectors from './index';
 import * as t from '%/actions/types';
+import reducer, * as selectors from './index';
 
 describe('reducers/login', () => {
   it('should set the token when login is successful', () => {

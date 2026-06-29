@@ -1,16 +1,14 @@
 const path = require('path');
 const express = require('express');
-const bodyParser = require('body-parser');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 const chalk = require('chalk');
 
+let config = require('@/config');
 const cmsConfig = require('@/config/cms');
 const { init } = require('./authService');
 const migrateContent = require('./migrateContent');
 const router = require('./router');
-
-let config = require('@/config');
 
 const isSissiCms = process.env.SISSI_CMS != null;
 
@@ -26,7 +24,7 @@ module.exports = async function startCms(serveFrontend = true) {
   let message = `API running on ${chalk.underline(`http://localhost:${config.cmsPort}/api`)}`;
 
   app.use(init());
-  app.use(bodyParser.json());
+  app.use(express.json());
   app.use(cors());
   app.use(fileUpload());
 

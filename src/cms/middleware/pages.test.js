@@ -1,7 +1,6 @@
 import _testState from '%/reducers/_testState';
-import middleware from './pages';
-
 import * as t from '%/actions/types';
+import middleware from './pages';
 
 describe('middleware/pages', () => {
   let mockAction, mockNext, mockStore, mockSelectors;
